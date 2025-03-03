@@ -12,18 +12,13 @@
     
     <buildtool_depend>ament_cmake</buildtool_depend>
     
-    <depend>urdf</depend>
-    <depend>xacro</depend>
-    <depend>rclcpp</depend>
-    <depend>geometry_msgs</depend>
-    <depend>tf2_ros</depend>
-    <depend>tf2_geometry_msgs</depend>
-    
+    <exec_depend>ros_gz_sim</exec_depend>
+    <exec_depend>ros_gz_bridge</exec_depend>
     <exec_depend>robot_state_publisher</exec_depend>
     <exec_depend>robot_localization</exec_depend>
     <exec_depend>imu_filter_madgwick</exec_depend>
-    <exec_depend>ros_gz_bridge</exec_depend>
-    <exec_depend>ros_gz_sim</exec_depend>
+    <exec_depend>urdf</exec_depend>
+    <exec_depend>xacro</exec_depend>
 
     <test_depend>ament_lint_auto</test_depend>
     <test_depend>ament_lint_common</test_depend>
