@@ -14,56 +14,33 @@ micp_localization:
     map_frame: map
     odom_frame: odom
 
-    # rate of broadcasting tf transformations
-    tf_rate: 50.0
+    # maximum number of correction steps per second
+    # lower this to decrease the correction speed but save energy 
+    correction_rate_max: 100.0
+    optimization_iterations: 10
+    tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
+    
+    # adjust max distance dependent of the state of localization
+    adaptive_max_dist: True # enable adaptive max dist
 
-    micp_settings:
-      solver: umeyama
+    # DEBUGGING
+    visualize_correspondences: True
+    print_correction_rate: False
+    disable_correction: True
 
-      # merging on gpu or cpu
-      combining_unit: cpu
-      # maximum number of correction steps per second
-      # lower this to decrease the correction speed but save energy 
-      corr_rate_max: 100.0
-      
-      # adjust max distance dependend of the state of localization
-      adaptive_max_dist: True # enable adaptive max dist
-
-      # DEBUGGING   
-      # corr = correspondences
-      viz_corr: True
-      # corr = correction
-      print_corr_rate: False
-      disable_corr: False
-
-      # initial pose changes
-      trans: [0.0, 0.0, 0.0]
-      rot: [0.0, 0.0, 0.0] # euler angles (3) or quaternion (4) 
+    # initial pose changes
+    trans: [0.0, 0.0, 0.0]
+    rot: [0.0, 0.0, 0.0] # euler angles (3) or quaternion (4)
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
       velodyne:
-        
-        type: spherical
-        model_source: config # [config, topic]
-        model:
-          range_min: 0.5
-          range_max: 130.0
-          phi_min: -0.261799067259
-          phi_inc: 0.03490658503988659
-          phi_n: 16
-          theta_min: -3.14159011841
-          theta_inc: 0.01431249500496489 # (2*pi)/439 instead of (2*pi)/440 
-          theta_n: 440
-        
         data_source: topic
         topic:
           name: /rmcl_pc_conversion/rmcl_scan
           type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
-
         correspondences:
           backend: optix
-          type: RC # RC: ray casting, CP: closest point
-          adaptive_max_dist_min: 0.15
-          max_dist: 2.0
-        
+          type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
+          adaptive_max_dist_min: 0.4
+          max_dist: 5.0
