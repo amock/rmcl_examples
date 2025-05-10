@@ -1,3 +1,11 @@
+rmcl_pc_conversion:
+  ros__parameters:
+    use_sim_time: True
+    debug_cloud: False
+    model:
+      range_min: 0.3
+      range_max: 50.0
+
 micp_localization:
   ros__parameters:
 
@@ -9,12 +17,14 @@ micp_localization:
     # rate of broadcasting tf transformations
     tf_rate: 50.0
 
-    micp:
+    micp_settings:
+      solver: umeyama
+
       # merging on gpu or cpu
-      combining_unit: gpu
+      combining_unit: cpu
       # maximum number of correction steps per second
       # lower this to decrease the correction speed but save energy 
-      corr_rate_max: 1000.0
+      corr_rate_max: 100.0
       
       # adjust max distance dependend of the state of localization
       adaptive_max_dist: True # enable adaptive max dist
@@ -33,14 +43,9 @@ micp_localization:
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
       velodyne:
-        topic: velodyne/points
-        topic_type: sensor_msgs/msg/PointCloud2
-        # type: o1dn
-        # model:
-        #   range_min: 0.5
-        #   range_max: 130.0
-        #   orig: [0.0, 0.0, 0.0]
+        
         type: spherical
+        model_source: config # [config, topic]
         model:
           range_min: 0.5
           range_max: 130.0
@@ -50,7 +55,15 @@ micp_localization:
           theta_min: -3.14159011841
           theta_inc: 0.01431249500496489 # (2*pi)/439 instead of (2*pi)/440 
           theta_n: 440
-        micp:
-          max_dist: 2.0
-          adaptive_max_dist_min: 0.15
+        
+        data_source: topic
+        topic:
+          name: /rmcl_pc_conversion/rmcl_scan
+          type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
+
+        correspondences:
           backend: optix
+          type: RC # RC: ray casting, CP: closest point
+          adaptive_max_dist_min: 0.15
+          max_dist: 2.0
+        
