@@ -1,7 +1,9 @@
 rmcl_pc_conversion:
   ros__parameters:
     use_sim_time: True
-    debug_cloud: False
+    debug_cloud: True
+    width_increment: 4
+    height_increment: 1
     model:
       range_min: 0.3
       range_max: 50.0
