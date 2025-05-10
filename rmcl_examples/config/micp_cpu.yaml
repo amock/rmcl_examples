@@ -26,7 +26,7 @@ micp_localization:
     # DEBUGGING
     visualize_correspondences: True
     print_correction_rate: False
-    disable_correction: True
+    disable_correction: False
 
     # initial pose changes
     trans: [0.0, 0.0, 0.0]
