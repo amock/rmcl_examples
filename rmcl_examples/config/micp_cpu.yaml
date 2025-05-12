@@ -1,13 +1,23 @@
+# Parameters for point cloud conversion node
+# it converts a sensor_msgs/PointCloud2 to a rmcl_msgs/O1DnStamped
+# simple fitering can be achieved by skipping rows or cols
 rmcl_pc_conversion:
   ros__parameters:
     use_sim_time: True
     debug_cloud: True
-    width_increment: 4
-    height_increment: 1
+    width:
+      skip_begin: 0 # skip elements from begin  
+      skip_end:   0 # skip elements from end
+      increment:  4 # increment to skip data. Simple filter to reduce scan density
+    height:
+      skip_begin: 0 # cutting height from begin
+      skip_end:   0 # cutting height from end
+      increment:  1 # increment to skip data. Simple filter to reduce scan density 
     model:
       range_min: 0.3
       range_max: 50.0
 
+# Parameters for the MICP-L node
 micp_localization:
   ros__parameters:
 
@@ -18,16 +28,17 @@ micp_localization:
 
     # maximum number of correction steps per second
     # lower this to decrease the correction speed but save energy 
-    correction_rate_max: 100.0
-    optimization_iterations: 10
+    correction_rate_max: 2.0
+    optimization_iterations: 8
     tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
+    broadcast_tf: True
+    publish_pose: True
     
     # adjust max distance dependent of the state of localization
     adaptive_max_dist: True # enable adaptive max dist
 
     # DEBUGGING
-    visualize_correspondences: True
-    print_correction_rate: False
+    visualize_correspondences: True # TODO: readd this
     disable_correction: False
 
     # initial pose changes
@@ -44,5 +55,5 @@ micp_localization:
         correspondences:
           backend: embree
           type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
-          adaptive_max_dist_min: 0.4
+          adaptive_max_dist_min: 1.0
           max_dist: 5.0
