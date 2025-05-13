@@ -44,7 +44,7 @@ micp_localization:
     disable_correction: False
 
     # initial pose changes
-    initial_pose_offset: [0.0, 0.0, 5.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
+    initial_pose_offset: [0.0, 0.0, 1.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
@@ -59,15 +59,16 @@ micp_localization:
       #     type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
       #     adaptive_max_dist_min: 0.15
       #     max_dist: 2.0
-      sick_tim:
-        data_source: topic
-        topic_name: /rmcl_scan_conversion/rmcl_scan
-        model_type: o1dn # spherical, pinhole, o1dn, ondn
-        correspondences:
-          backend: embree
-          type: RC
-          adaptive_max_dist_min: 0.15
-          max_dist: 2.0
+      # sick_tim:
+      #   data_source: topic
+      #   topic_name: /rmcl_scan_conversion/rmcl_scan
+      #   model_type: spherical # spherical, pinhole, o1dn, ondn
+      #   correspondences:
+      #     backend: embree
+      #     type: RC
+      #     adaptive_max_dist_min: 0.15
+      #     max_dist: 2.0
+      #     visualize: true
       # velodyne2:
       #   data_source: topic
       #   topic:
@@ -95,9 +96,11 @@ micp_localization:
                    0.0,  0.0, -1.0,
                    0.0,  0.0, -1.0]
         data:
+          frame: base_footprint
           ranges: [0.2, 0.2, 0.2, 0.2]
         correspondences:
           backend: embree
           type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
-          adaptive_max_dist_min: 0.15
-          max_dist: 2.0
+          adaptive_max_dist_min: 10.0
+          max_dist: 10.0
+          visualize: true
