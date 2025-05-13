@@ -49,33 +49,33 @@ micp_localization:
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
-      velodyne:
-        data_source: topic
-        topic:
-          name: /rmcl_pc_conversion/rmcl_scan
-          type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
-        correspondences:
-          backend: embree
-          type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
-          adaptive_max_dist_min: 0.15
-          max_dist: 2.0
-      # sick_tim:
+      # velodyne:
       #   data_source: topic
       #   topic:
-      #     name: /scan
-      #     type: rmcl_msgs/msg/ScanStamped
+      #     name: /rmcl_pc_conversion/rmcl_scan
+      #     type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
       #   correspondences:
       #     backend: embree
-      #     type: RC
+      #     type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
       #     adaptive_max_dist_min: 0.15
       #     max_dist: 2.0
-      velodyne2:
+      sick_tim:
         data_source: topic
         topic:
-          name: /rmcl_pc_conversion/rmcl_scan
-          type: rmcl_msgs/msg/O1DnStamped
+          name: /rmcl_scan_conversion/rmcl_scan
+          type: rmcl_msgs/msg/ScanStamped
         correspondences:
           backend: embree
-          type: CP
-          adaptive_max_dist_min: 0.1
-          max_dist: 1.0
+          type: RC
+          adaptive_max_dist_min: 0.15
+          max_dist: 2.0
+      # velodyne2:
+      #   data_source: topic
+      #   topic:
+      #     name: /rmcl_pc_conversion/rmcl_scan
+      #     type: rmcl_msgs/msg/O1DnStamped
+      #   correspondences:
+      #     backend: embree
+      #     type: CP
+      #     adaptive_max_dist_min: 0.1
+      #     max_dist: 1.0
