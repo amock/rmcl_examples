@@ -29,8 +29,8 @@ micp_localization:
 
     # maximum number of correction steps per second
     # lower this to decrease the correction speed but save energy 
-    correction_rate_max: 50.0
-    optimization_iterations: 8
+    correction_rate_max: 30.0
+    optimization_iterations: 5
     tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
     broadcast_tf: True
     publish_pose: True
@@ -41,10 +41,10 @@ micp_localization:
 
     # DEBUGGING
     visualize_correspondences: True # TODO: readd this
-    disable_correction: False
+    disable_correction: True
 
     # initial pose changes
-    initial_pose_offset: [0.0, 0.0, 1.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
+    initial_pose_offset: [0.0, 0.0, 0.5, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
@@ -101,6 +101,6 @@ micp_localization:
         correspondences:
           backend: embree
           type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
-          adaptive_max_dist_min: 10.0
-          max_dist: 10.0
+          adaptive_max_dist_min: 2.0
+          max_dist: 2.0
           visualize: true
