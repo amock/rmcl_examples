@@ -8,7 +8,7 @@ rmcl_pc_conversion:
     width:
       skip_begin: 0 # skip elements from begin  
       skip_end:   0 # skip elements from end
-      increment:  4 # increment to skip data. Simple filter to reduce scan density
+      increment:  1 # increment to skip data. Simple filter to reduce scan density
     height:
       skip_begin: 0 # cutting height from begin
       skip_end:   0 # cutting height from end
@@ -44,12 +44,12 @@ micp_localization:
     disable_correction: False
 
     # initial pose changes
-    trans: [0.0, 0.0, 0.0]
-    rot: [0.0, 0.0, 0.0] # euler angles (3) or quaternion (4)
+    initial_pose_offset: [0.0, 0.0, 5.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
       # velodyne:
+      #   model_source: topic
       #   data_source: topic
       #   topic:
       #     name: /rmcl_pc_conversion/rmcl_scan
@@ -61,9 +61,8 @@ micp_localization:
       #     max_dist: 2.0
       sick_tim:
         data_source: topic
-        topic:
-          name: /rmcl_scan_conversion/rmcl_scan
-          type: rmcl_msgs/msg/ScanStamped
+        topic_name: /rmcl_scan_conversion/rmcl_scan
+        model_type: o1dn # spherical, pinhole, o1dn, ondn
         correspondences:
           backend: embree
           type: RC
@@ -79,3 +78,26 @@ micp_localization:
       #     type: CP
       #     adaptive_max_dist_min: 0.1
       #     max_dist: 1.0
+      wheels:
+        data_source: parameters
+        model_type: ondn
+        model:
+          width: 4
+          height: 1
+          range_min: 0.0
+          range_max: 10.0
+          origs: [ 0.15,  0.18,  0.2, # front left 
+                   0.15, -0.18,  0.2, # front right
+                  -0.15,  0.18,  0.2, # rear left
+                  -0.15, -0.18,  0.2] # rear right
+          dirs:  [ 0.0,  0.0, -1.0,
+                   0.0,  0.0, -1.0,
+                   0.0,  0.0, -1.0,
+                   0.0,  0.0, -1.0]
+        data:
+          ranges: [0.2, 0.2, 0.2, 0.2]
+        correspondences:
+          backend: embree
+          type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
+          adaptive_max_dist_min: 0.15
+          max_dist: 2.0

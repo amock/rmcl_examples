@@ -1,32 +1,3 @@
-# Copyright 2024 Nature Robots GmbH
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-#    * Redistributions of source code must retain the above copyright
-#      notice, this list of conditions and the following disclaimer.
-#
-#    * Redistributions in binary form must reproduce the above copyright
-#      notice, this list of conditions and the following disclaimer in the
-#      documentation and/or other materials provided with the distribution.
-#
-#    * Neither the name of the Nature Robots GmbH nor the names of its
-#      contributors may be used to endorse or promote products derived from
-#      this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-# POSSIBILITY OF SUCH DAMAGE.
-
-
 import os
 
 from ament_index_python.packages import get_package_share_directory
@@ -60,6 +31,24 @@ def generate_launch_description():
             default_value="True",
             choices=["True", "False"],
         ),
+        DeclareLaunchArgument(
+            "velodyne_vlp16",
+            description="Simulate Velodyne VLP-16 Sensor (3D LiDAR)",
+            default_value="True",
+            choices=["True", "False"],
+        ),
+        DeclareLaunchArgument(
+            "sick_tim",
+            description="Simulate Sick Tim sensor (2D LiDAR)",
+            default_value="False",
+            choices=["True", "False"],
+        ),
+        DeclareLaunchArgument(
+            "asus_xtion",
+            description="Simulate Asus Xtion sensor",
+            default_value="False",
+            choices=["True", "False"],
+        ),
     ]
     map_name = LaunchConfiguration("map")
     map_path = PathJoinSubstitution(
@@ -71,6 +60,11 @@ def generate_launch_description():
     )
     start_gazebo_gui = LaunchConfiguration("start_gazebo_gui")
 
+    # sensors
+    velodyne_vlp16 = LaunchConfiguration("velodyne_vlp16")
+    sick_tim = LaunchConfiguration("sick_tim")
+    asus_xtion = LaunchConfiguration("asus_xtion")
+
     robot_description = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -79,6 +73,9 @@ def generate_launch_description():
             " name:=robot",
             " prefix:='robot'",
             " is_sim:=true",
+            PythonExpression(['" sick_tim:=true" if ', sick_tim, ' else " sick_tim:=false"']),
+            PythonExpression(['" velodyne_vlp16:=true" if ', velodyne_vlp16, ' else " velodyne_vlp16:=false"']),
+            PythonExpression(['" asus_xtion:=true" if ', asus_xtion, ' else " asus_xtion:=false"']),
         ]
     )
 
