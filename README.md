@@ -2,119 +2,66 @@
 
 Examples to test the [rmcl](https://github.com/uos/rmcl) ROS package.
 
-## Worlds, Maps and Simulation
+## Simulation
 
-In the `maps` folder there are several triangle meshes that can be used as a map for the robot.
-The robot and each map can be loaded into one simulation by calling
+In the [`rmcl_examples_sim`](./rmcl_examples_sim/README.md) packages are placed several simulation environments to spawn a mobile robot in.
 
-```console
-$ ros2 launch rmcl_sim start_robot_launch.py map:=tray
+
+
+The robot can be loaded into one simulation by calling
+
+```bash
+ros2 launch rmcl_examples_sim start_robot_launch.py map:=tray
 ```
 
-The map can be changed by either changing the launch file's default arguments or via command line.
+The environment can be changed by either changing the launch file's default arguments or via command line. For further details and what maps are available, see [`rmcl_examples_sim`](./rmcl_examples_sim/README.md).
 
-After that, try to visualize the triangle mesh map via RViz.
-[rmcl](https://github.com/uos/rmcl) itself does not provide any mesh visualization tools.
-I myself use the RViz plugin of the mesh_tools: https://github.com/naturerobots/mesh_tools (Branch: humble)
+## Maps
 
-```
-$ ros2 launch rmcl_examples rviz.launch map:=tray
-```
+The [`rmcl_examples_maps`](./rmcl_examples_maps/README.md) contains mesh maps each of which corresponds to one (same named) simulation environment.
 
-The worlds `cube`, `sphere`, `cylinder`, and `tray` look as follows:
+- [mesh_tools](https://github.com/naturerobots/mesh_tools)
 
-|  Gazebo  |  RViz  |
-|:--------:|:------:|
-| ![Cube World Gazebo](.resources/img/cube_gazebo.png "Cube World Gazebo") | ![Cube Map Rviz](.resources/img/cube_rviz.png "Cube Map Rviz") |
-| ![Sphere World Gazebo](.resources/img/sphere_gazebo.png "Sphere World Gazebo") | ![Sphere Map Rviz](.resources/img/sphere_rviz.png "Sphere Map Rviz") |
-| ![Cylinder World Gazebo](.resources/img/cylinder_gazebo.png "Cylinder World Gazebo") | ![Cylinder Map Rviz](.resources/img/cylinder_rviz.png "Cylinder Map Rviz") |
-| ![Tray World Gazebo](.resources/img/tray_gazebo.png "Tray World Gazebo") | ![Tray Map Rviz](.resources/img/tray_rviz.png "Tray Map Rviz") |
-
-all environments are designed to benchmark localization algorithms, each posing a unique and challenging problem.
-Most of these environments are intentionally constructed to prevent unique localization solutions.
-Instead, the objective is to achieve the best possible reduction of the belief state informed by the sensor data.
-A localization method is considered to fail if it produces a single definitive solution when multiple locations are equally probable.
-The following table briefly summarize the best possible localization outcome for a robot equipped with motor encoders, an IMU and a 3D LiDAR:
-
-
-|  World Name | Best possible localization |
-|:------------|:-------------------------------------------------------|
-|  `cube`     | 4 modes in your belief state probability distribution  |
-|  `sphere`   | Equal probabilty for every pose located on the surface |
-|  `cylinder` | Circular probability distribution |
-|  `tray`     | Similar to cube but rectengular: 2 most probable modes. Dependent on the system and sensor noise, two more slightly less probable modes could exist. |
-|  `corridor` | State: anywhere in the center of the corridor. Belief state: same probability everywhere in the center of the corridor |
-|  `trays`    | 3x3 grid of `tray` model. Same most probable modes as for the `tray` environment but symmetrically distributed over a 3x3 grid. |
-|  `avz`      | Old office floor of Osnabrück University in the AVZ building. Real world sample, still many ambiguities such as same sized rooms. |
-
-
-## MICP Localization
-
-To start MICP-L, run
-
-```
-$ ros2 launch rmcl_examples rmcl_micp.launch map:=tray
+```bash
+ros2 launch rmcl_examples_maps show_map.launch map:=tray
 ```
 
-Again, the map has to match the maps that have been used with the simulation and visualization.
-For different settings of MICP-L you can pass a configuration file to the launch file as follows
+Those maps can are used throughout the examples as reference map for [RMCL](https://github.com/uos/rmcl) to localize a robot. See [`rmcl_examples_maps`](./rmcl_examples_maps/README.md) for further detailes.
 
-```
-$ ros2 launch rmcl_examples rmcl_micp.launch map:=tray config:=/path/to/config 
-```
+## MICP-L - Quickstart
 
-You can find examples for such configuration files in the `config` folder. After starting MICP-L, the outputs should look as follows:
+To start MICP-L (Mesh ICP Localization), run
 
-```console
-MICP initiailized
-
--------------------------
-    --- BACKENDS ---    
--------------------------
-Available combining units:
-- CPU
-- GPU
-Selected Combining Unit: CPU
-
-Available raytracing backends:
-- Embree (CPU)
-- Optix (GPU)
-
-MICP load params
-
--------------------------
-     --- FRAMES ---      
--------------------------
-- base:			base_footprint
-- odom:			odom_combined
-  - base -> odom:	yes
-- map:			map
-Estimating: base_footprint -> map
-Providing: odom_combined -> map
-
--------------------------
-     --- SENSORS ---     
--------------------------
-- velodyne
-  - data:		Topic
-    - topic:		/velodyne/points
-    - msg:		sensor_msgs/PointCloud2
-    - data:		yes
-    - frame:		velodyne
-  - model:		Params
-  - type:		spherical - loaded
-  - micp:
-    - backend:		embree
-MICP load params - done. Valid Sensors: 1
-TF Rate: 50
-Waiting for pose guess...
+```bash
+ros2 launch rmcl_examples rmcl_micp.launch map:=tray gui:=True
 ```
 
-After that you can set a pose in RViz via `2D Pose Estimate` and see the robot localizing itself given the range measurements of the Velodyne LiDaR. Alternatively, you can use the `Mesh Pose Guess` tool of `mesh_tools` to provide a pose guess on the mesh.
+**Note**: the map has to match the environment that have been used with the simulation!
+
+The argument `gui:=True` courses a preconfigured RViz windows to open.
+After that you can set a pose in RViz via `2D Pose Estimate` and see the robot localizing itself given the range measurements of the Velodyne LiDAR. Alternatively, you can use the `Mesh Pose Guess` tool of [`mesh_tools`](https://github.com/naturerobots/mesh_tools) to provide a pose guess on the mesh.
 
 ![MICP](.resources/vid/rmcl_micp_1280.gif)
 
-If visualizations are enabled in the micp config file, the ray casting correspondences (RCC) can be visualized per sensor `X` as marker on the topic `micp_localization/sensors/X/correspondences`.
 
-![Ray casting correspondences (RCC)](.resources/img/spc.png "Ray casting correspondences (RCC)")
+### MICP-L - Examples
 
+#### 1. [Overview](/rmcl_examples_micpl/README.md)
+
+Three sensors, four wheels, and many worlds.
+
+#### 2. [Conversions](/rmcl_examples_conversions/README.md)
+
+Use you own data for MICP-L. Message conversions explained.
+
+#### 3. [Segmentation](/rmcl_examples_micpl_segmentation/README.md)
+
+Filter expected parts of you sensor data and mark the unexpected parts of the data and the map.
+
+#### 4. [Node Composition](/rmcl_examples_micpl_composition/README.md)
+
+Let the sensor data flow more efficiently to MICP-L.
+
+#### 5. [Sensor Combinations](/rmcl_examples_micpl_combinations/README.md)
+
+Combine several sensors and use all at once.

@@ -1,0 +1,46 @@
+rmcl_pc_conversion:
+  ros__parameters:
+    use_sim_time: True
+    debug_cloud: False
+    model:
+      range_min: 0.3
+      range_max: 50.0
+
+micp_localization:
+  ros__parameters:
+
+    # required
+    base_frame: base_footprint
+    map_frame: map
+    odom_frame: odom
+
+    # maximum number of correction steps per second
+    # lower this to decrease the correction speed but save energy 
+    correction_rate_max: 100.0
+    optimization_iterations: 10
+    tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
+    
+    # adjust max distance dependent of the state of localization
+    adaptive_max_dist: True # enable adaptive max dist
+
+    # DEBUGGING
+    visualize_correspondences: True
+    print_correction_rate: False
+    disable_correction: False
+
+    # initial pose changes
+    trans: [0.0, 0.0, 0.0]
+    rot: [0.0, 0.0, 0.0] # euler angles (3) or quaternion (4)
+
+    # describe your sensor setup here
+    sensors: # list of range sensors - at least one is required
+      velodyne:
+        data_source: topic
+        topic:
+          name: /rmcl_pc_conversion/rmcl_scan
+          type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
+        correspondences:
+          backend: optix
+          type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
+          adaptive_max_dist_min: 0.4
+          max_dist: 5.0
