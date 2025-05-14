@@ -46,7 +46,7 @@ After that you can set a pose in RViz via `2D Pose Estimate` and see the robot l
 
 ### MICP-L - Examples
 
-#### 1. [Overview](/rmcl_examples_micpl/README.md)
+#### 1. [Overview](/rmcl_examples_micpl/)
 
 Three sensors, four wheels, and many worlds.
 
