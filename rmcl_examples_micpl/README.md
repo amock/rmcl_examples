@@ -51,6 +51,8 @@ an RViz window opens
 
 ![MICP-L LiDAR3D](.media/rmcl_examples_micpl_lidar3d.png)
 
+Now you can provide new pose guesses using the `2D Pose Estimate` or `Mesh Pose Estimate` tool from the tools panel on top.
+The correspondences are visualized as marker gray-ish hair.
 
 ### Depth Camera
 
