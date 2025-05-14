@@ -6,13 +6,13 @@ This package holds all the 3D maps used in [rmcl_examples](/).
 
 Check which maps are available:
 
-```bash
+```console
 ros2 launch rmcl_examples_maps show_map.launch -s
 ```
 
 The `map` entry lists all the available maps of which one can be visualized via:
 
-```bash
+```console
 ros2 launch rmcl_examples_maps show_map.launch map:=avz
 ```
 

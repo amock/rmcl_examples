@@ -10,7 +10,7 @@ In the [`rmcl_examples_sim`](/rmcl_examples_sim/) packages are placed several si
 
 The robot can be loaded into one simulation by calling
 
-```bash
+```console
 ros2 launch rmcl_examples_sim start_robot_launch.py map:=tray
 ```
 
@@ -22,7 +22,7 @@ The [`rmcl_examples_maps`](/rmcl_examples_maps/) contains mesh maps each of whic
 
 - [mesh_tools](https://github.com/naturerobots/mesh_tools)
 
-```bash
+```console
 ros2 launch rmcl_examples_maps show_map.launch map:=tray
 ```
 
@@ -32,7 +32,7 @@ Those maps can are used throughout the examples as reference map for [RMCL](http
 
 To start MICP-L (Mesh ICP Localization), run
 
-```bash
+```console
 ros2 launch rmcl_examples rmcl_micp.launch map:=tray gui:=True
 ```
 
