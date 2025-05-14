@@ -1,6 +1,6 @@
 # rmcl_examples_maps
 
-This package holds all the 3D maps used in [rmcl_examples](../README.md).
+This package holds all the 3D maps used in [rmcl_examples](/).
 
 ### Visualize a map in RViz
 
@@ -22,7 +22,7 @@ This opens an RViz window like this:
 
 ## What's in here?
 
-Each map corresponds to a specific environment. These environments can also be simulated using the [rmcl_examples_sim](../rmcl_examples_sim/README.md) package.  
+Each map corresponds to a specific environment. These environments can also be simulated using the [rmcl_examples_sim](/rmcl_examples_sim/) package.  
 That package uses clones of these maps to simulate the environment and spawn a robot inside it.
 
 This creates an interesting (and rare) setup: the simulated environment matches the map exactly — something you don’t get in the real world.

@@ -1,6 +1,6 @@
 # rmcl_sim
 
-This package contains all simulation environments for [rmcl_examples](../README.md).
+This package contains all simulation environments for [rmcl_examples](/).
 
 All environments are designed to benchmark localization algorithms, each posing a unique and challenging problem.
 Most of these environments are intentionally constructed to prevent unique localization solutions.

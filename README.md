@@ -4,7 +4,7 @@ Examples to test the [rmcl](https://github.com/uos/rmcl) ROS package.
 
 ## Simulation
 
-In the [`rmcl_examples_sim`](./rmcl_examples_sim/README.md) packages are placed several simulation environments to spawn a mobile robot in.
+In the [`rmcl_examples_sim`](/rmcl_examples_sim/) packages are placed several simulation environments to spawn a mobile robot in.
 
 
 
@@ -14,11 +14,11 @@ The robot can be loaded into one simulation by calling
 ros2 launch rmcl_examples_sim start_robot_launch.py map:=tray
 ```
 
-The environment can be changed by either changing the launch file's default arguments or via command line. For further details and what maps are available, see [`rmcl_examples_sim`](./rmcl_examples_sim/README.md).
+The environment can be changed by either changing the launch file's default arguments or via command line. For further details and what maps are available, see [`rmcl_examples_sim`](/rmcl_examples_sim/).
 
 ## Maps
 
-The [`rmcl_examples_maps`](./rmcl_examples_maps/README.md) contains mesh maps each of which corresponds to one (same named) simulation environment.
+The [`rmcl_examples_maps`](/rmcl_examples_maps/) contains mesh maps each of which corresponds to one (same named) simulation environment.
 
 - [mesh_tools](https://github.com/naturerobots/mesh_tools)
 
@@ -26,7 +26,7 @@ The [`rmcl_examples_maps`](./rmcl_examples_maps/README.md) contains mesh maps ea
 ros2 launch rmcl_examples_maps show_map.launch map:=tray
 ```
 
-Those maps can are used throughout the examples as reference map for [RMCL](https://github.com/uos/rmcl) to localize a robot. See [`rmcl_examples_maps`](./rmcl_examples_maps/README.md) for further detailes.
+Those maps can are used throughout the examples as reference map for [RMCL](https://github.com/uos/rmcl) to localize a robot. See [`rmcl_examples_maps`](/rmcl_examples_maps/) for further detailes.
 
 ## MICP-L - Quickstart
 
@@ -50,18 +50,18 @@ After that you can set a pose in RViz via `2D Pose Estimate` and see the robot l
 
 Three sensors, four wheels, and many worlds.
 
-#### 2. [Conversions](/rmcl_examples_conversions/README.md)
+#### 2. [Conversions](/rmcl_examples_conversions/)
 
 Use you own data for MICP-L. Message conversions explained.
 
-#### 3. [Segmentation](/rmcl_examples_micpl_segmentation/README.md)
+#### 3. [Segmentation](/rmcl_examples_micpl_segmentation/)
 
 Filter expected parts of you sensor data and mark the unexpected parts of the data and the map.
 
-#### 4. [Node Composition](/rmcl_examples_micpl_composition/README.md)
+#### 4. [Node Composition](/rmcl_examples_micpl_composition/)
 
 Let the sensor data flow more efficiently to MICP-L.
 
-#### 5. [Sensor Combinations](/rmcl_examples_micpl_combinations/README.md)
+#### 5. [Sensor Combinations](/rmcl_examples_micpl_combinations/)
 
 Combine several sensors and use all at once.
