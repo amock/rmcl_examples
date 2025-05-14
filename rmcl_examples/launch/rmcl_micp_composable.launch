@@ -7,30 +7,30 @@
 <arg name="log_level" default="INFO" description="Log level for debugging purposes. Select from [DEBUG, INFO, WARN, ...]" />
 
 <node_container pkg="rclcpp_components" exec="component_container" name="rmcl_micp" namespace="" output="screen" args="--ros-args --log-level $(var log_level)">
-  <!-- <composable_node pkg="rmcl_ros" plugin="rmcl::Pc2ToO1DnNode" name="rmcl_pc_conversion">
+  <composable_node pkg="rmcl_ros" plugin="rmcl::Pc2ToO1DnNode" name="rmcl_velo_conversion">
     <param name="use_sim_time" value="true" />
     <param from="$(var config)" />
     <remap from="cloud" to="/velodyne/points"/>
-    <remap from="rmcl_scan" to="~/rmcl_scan"/>
-  </composable_node> -->
-  <composable_node pkg="rmcl_ros" plugin="rmcl::ScanToScanNode" name="rmcl_scan_conversion">
+    <remap from="rmcl_scan" to="/rmcl_inputs/velodyne"/>
+  </composable_node>
+  <composable_node pkg="rmcl_ros" plugin="rmcl::ScanToScanNode" name="rmcl_sick_conversion">
     <param name="use_sim_time" value="true" />
     <param from="$(var config)" />
     <remap from="scan" to="/scan"/>
-    <remap from="rmcl_scan" to="~/rmcl_scan"/>
+    <remap from="rmcl_scan" to="/rmcl_inputs/sick_tim"/>
   </composable_node>
-  <!-- <composable_node pkg="rmcl_ros" plugin="rmcl::Pc2ToO1DnNode" name="rmcl_pc_conversion">
+  <composable_node pkg="rmcl_ros" plugin="rmcl::Pc2ToO1DnNode" name="rmcl_xtion_conversion">
     <param name="use_sim_time" value="true" />
     <param from="$(var config)" />
     <remap from="cloud" to="/rgbd_camera/points"/>
-    <remap from="rmcl_scan" to="~/rmcl_scan"/>
-  </composable_node> -->
-  <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="micp_localization">
+    <remap from="rmcl_scan" to="/rmcl_inputs/asus_xtion"/>
+  </composable_node>
+  <!-- <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="micp_localization">
     <param name="use_sim_time" value="true" />
     <param name="map_file" value="$(find-pkg-share rmcl_examples)/maps/$(var map).dae" />
     <param from="$(var config)" />
     <remap from="pose_wc" to="/initialpose" />
-  </composable_node>
+  </composable_node> -->
 </node_container>
 
 <group if="$(var gui)">

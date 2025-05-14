@@ -250,9 +250,9 @@
         </ray>
         <always_on>1</always_on>
         <visualize>true</visualize>
-        <frame_id>velodyne</frame_id>
-        <gz_frame_id>velodyne</gz_frame_id>
-        <ign_frame_id>velodyne</ign_frame_id>
+        <frame_id>sick_tim</frame_id>
+        <gz_frame_id>sick_tim</gz_frame_id>
+        <ign_frame_id>sick_tim</ign_frame_id>
       </sensor>
     </gazebo>
   </xacro:if>
