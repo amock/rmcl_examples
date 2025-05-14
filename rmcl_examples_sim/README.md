@@ -1,4 +1,4 @@
-# rmcl_sim
+# rmcl_examples_sim
 
 This package contains all simulation environments for [rmcl_examples](/).
 

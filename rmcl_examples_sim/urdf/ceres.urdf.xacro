@@ -6,13 +6,13 @@
   xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
   name="robot">
 
-  <xacro:include filename="$(find rmcl_sim)/urdf/common.urdf.xacro" />
-  <xacro:include filename="$(find rmcl_sim)/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="$(find rmcl_examples_sim)/urdf/common.urdf.xacro" />
+  <xacro:include filename="$(find rmcl_examples_sim)/urdf/wheel.urdf.xacro" />
 
   <!-- Args -->  
-  <xacro:arg name="velodyne_vlp16" default="true"/>
-  <xacro:arg name="sick_tim" default="false"/>
-  <xacro:arg name="asus_xtion" default="false"/>
+  <xacro:arg name="lidar3d" default="true"/>
+  <xacro:arg name="lidar2d" default="false"/>
+  <xacro:arg name="rgbd_camera" default="false"/>
 
   <xacro:property name="M_PI" value="3.14159265359"/>
   
@@ -129,8 +129,8 @@
     </sensor>
   </gazebo>
 
-  <xacro:if value="$(arg velodyne_vlp16)">
-    <link name="velodyne">
+  <xacro:if value="$(arg lidar3d)">
+    <link name="lidar3d">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -152,15 +152,15 @@
         />
     </link>
 
-    <joint name="velodyne_to_base_joint" type="fixed">
+    <joint name="lidar3d_to_base_joint" type="fixed">
       <parent link="base_link" />
-      <child link="velodyne" />
+      <child link="lidar3d" />
       <origin xyz="0 0 ${body_height/2 + 0.4}"/>
     </joint>
 
-    <gazebo reference="velodyne">
-      <sensor name="velodyne" type="gpu_lidar">
-        <pose relative_to="velodyne">0 0 0 0 0 0</pose>
+    <gazebo reference="lidar3d">
+      <sensor name="lidar3d" type="gpu_lidar">
+        <pose relative_to="lidar3d">0 0 0 0 0 0</pose>
         <topic>/model/robot/cloud</topic>
         <update_rate>10</update_rate>
         <ray>
@@ -186,15 +186,15 @@
         </ray>
         <always_on>1</always_on>
         <visualize>true</visualize>
-        <frame_id>velodyne</frame_id>
-        <gz_frame_id>velodyne</gz_frame_id>
-        <ign_frame_id>velodyne</ign_frame_id>
+        <frame_id>lidar3d</frame_id>
+        <gz_frame_id>lidar3d</gz_frame_id>
+        <ign_frame_id>lidar3d</ign_frame_id>
       </sensor>
     </gazebo>
   </xacro:if>
 
-  <xacro:if value="$(arg sick_tim)">
-    <link name="sick_tim">
+  <xacro:if value="$(arg lidar2d)">
+    <link name="lidar2d">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -216,15 +216,15 @@
         />
     </link>
     
-    <joint name="sick_tim_to_base_joint" type="fixed">
+    <joint name="lidar2d_to_base_joint" type="fixed">
       <parent link="base_link" />
-      <child link="sick_tim" />
+      <child link="lidar2d" />
       <origin xyz="0 0 ${body_height/2 + 0.2}"/>
     </joint>
 
-    <gazebo reference="sick_tim">
-      <sensor name="sick_tim" type="gpu_lidar">
-        <pose relative_to="sick_tim">0 0 0 0 0 0</pose>
+    <gazebo reference="lidar2d">
+      <sensor name="lidar2d" type="gpu_lidar">
+        <pose relative_to="lidar2d">0 0 0 0 0 0</pose>
         <topic>/model/robot/scan</topic>
         <update_rate>10</update_rate>
         <ray>
@@ -250,15 +250,15 @@
         </ray>
         <always_on>1</always_on>
         <visualize>true</visualize>
-        <frame_id>sick_tim</frame_id>
-        <gz_frame_id>sick_tim</gz_frame_id>
-        <ign_frame_id>sick_tim</ign_frame_id>
+        <frame_id>lidar2d</frame_id>
+        <gz_frame_id>lidar2d</gz_frame_id>
+        <ign_frame_id>lidar2d</ign_frame_id>
       </sensor>
     </gazebo>
   </xacro:if>
 
-  <xacro:if value="$(arg asus_xtion)">
-    <link name="asus_xtion">
+  <xacro:if value="$(arg rgbd_camera)">
+    <link name="rgbd_camera">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -281,14 +281,14 @@
         />
     </link>
 
-    <joint name="asus_xtion_to_base_joint" type="fixed">
+    <joint name="rgbd_camera_to_base_joint" type="fixed">
       <parent link="base_link" />
-      <child link="asus_xtion" />
+      <child link="rgbd_camera" />
       <origin xyz="0.2 0 ${body_height/2 + 0.1}" rpy="0.0 0.2 0.0" />
     </joint>
 
-    <gazebo reference="asus_xtion">
-      <sensor name="asus_xtion" type="rgbd_camera">
+    <gazebo reference="rgbd_camera">
+      <sensor name="rgbd_camera" type="rgbd_camera">
         <camera>
           <horizontal_fov>1.047</horizontal_fov>
           <image>
@@ -305,9 +305,9 @@
         <visualize>true</visualize>
         <topic>/model/robot/rgbd_camera</topic>
         <enable_metrics>true</enable_metrics>
-        <frame_id>asus_xtion</frame_id>
-        <gz_frame_id>asus_xtion</gz_frame_id>
-        <ign_frame_id>asus_xtion</ign_frame_id>
+        <frame_id>rgbd_camera</frame_id>
+        <gz_frame_id>rgbd_camera</gz_frame_id>
+        <ign_frame_id>rgbd_camera</ign_frame_id>
       </sensor>
     </gazebo>
   </xacro:if>

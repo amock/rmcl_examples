@@ -3,7 +3,7 @@
 <package format="3">
     <name>rmcl_examples_sim</name>
     <version>3.0.0</version>
-    <description>The rmcl_sim package</description>
+    <description>The rmcl_examples_sim package</description>
 
     <maintainer email="amock@uos.de">Alexander Mock</maintainer>
 

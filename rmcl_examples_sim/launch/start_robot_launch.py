@@ -12,8 +12,8 @@ from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoin
 
 def generate_launch_description():
     # path to this pkg
-    pkg_rmcl_sim = get_package_share_directory(
-        "rmcl_sim"
+    pkg_rmcl_examples_sim = get_package_share_directory(
+        "rmcl_examples_sim"
     )
 
     # Launch arguments
@@ -32,20 +32,20 @@ def generate_launch_description():
             choices=["True", "False"],
         ),
         DeclareLaunchArgument(
-            "velodyne_vlp16",
-            description="Simulate Velodyne VLP-16 Sensor (3D LiDAR)",
+            "lidar3d",
+            description="Simulate 3D LiDAR",
             default_value="True",
             choices=["True", "False"],
         ),
         DeclareLaunchArgument(
-            "sick_tim",
-            description="Simulate Sick Tim sensor (2D LiDAR)",
+            "lidar2d",
+            description="Simulate 2D LiDAR",
             default_value="False",
             choices=["True", "False"],
         ),
         DeclareLaunchArgument(
-            "asus_xtion",
-            description="Simulate Asus Xtion sensor",
+            "rgbd_camera",
+            description="Simulate RGB-D sensor",
             default_value="False",
             choices=["True", "False"],
         ),
@@ -53,7 +53,7 @@ def generate_launch_description():
     map_name = LaunchConfiguration("map")
     map_path = PathJoinSubstitution(
         [
-            pkg_rmcl_sim,
+            pkg_rmcl_examples_sim,
             "worlds",
             PythonExpression(['"rmcl_', map_name, '.sdf"']),
         ]
@@ -61,21 +61,21 @@ def generate_launch_description():
     start_gazebo_gui = LaunchConfiguration("start_gazebo_gui")
 
     # sensors
-    velodyne_vlp16 = LaunchConfiguration("velodyne_vlp16")
-    sick_tim = LaunchConfiguration("sick_tim")
-    asus_xtion = LaunchConfiguration("asus_xtion")
+    lidar3d = LaunchConfiguration("lidar3d")
+    lidar2d = LaunchConfiguration("lidar2d")
+    rgbd_camera = LaunchConfiguration("rgbd_camera")
 
     robot_description = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([pkg_rmcl_sim, "urdf/ceres.urdf.xacro"]),
+            PathJoinSubstitution([pkg_rmcl_examples_sim, "urdf/ceres.urdf.xacro"]),
             " name:=robot",
             " prefix:='robot'",
             " is_sim:=true",
-            PythonExpression(['" sick_tim:=true" if ', sick_tim, ' else " sick_tim:=false"']),
-            PythonExpression(['" velodyne_vlp16:=true" if ', velodyne_vlp16, ' else " velodyne_vlp16:=false"']),
-            PythonExpression(['" asus_xtion:=true" if ', asus_xtion, ' else " asus_xtion:=false"']),
+            PythonExpression(['" lidar3d:=true" if ', lidar3d, ' else " lidar3d:=false"']),
+            PythonExpression(['" lidar2d:=true" if ', lidar2d, ' else " lidar2d:=false"']),
+            PythonExpression(['" rgbd_camera:=true" if ', rgbd_camera, ' else " rgbd_camera:=false"']),
         ]
     )
 
@@ -136,7 +136,7 @@ def generate_launch_description():
         parameters=[
             {
                 "config_file": PathJoinSubstitution(
-                    [pkg_rmcl_sim, "config", "ros_gazebo_bridge.yaml"]
+                    [pkg_rmcl_examples_sim, "config", "ros_gazebo_bridge.yaml"]
                 ),
             }
         ],
@@ -151,7 +151,7 @@ def generate_launch_description():
         output="screen",
         parameters=[
             {"use_sim_time": True},
-            PathJoinSubstitution([pkg_rmcl_sim, "config", "ekf.yaml"]),
+            PathJoinSubstitution([pkg_rmcl_examples_sim, "config", "ekf.yaml"]),
         ],
     )
 

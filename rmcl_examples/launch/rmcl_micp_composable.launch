@@ -25,19 +25,19 @@
     <remap from="cloud" to="/rgbd_camera/points"/>
     <remap from="rmcl_scan" to="/rmcl_inputs/asus_xtion"/>
   </composable_node>
-  <!-- <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="micp_localization">
+  <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="micp_localization">
     <param name="use_sim_time" value="true" />
-    <param name="map_file" value="$(find-pkg-share rmcl_examples)/maps/$(var map).dae" />
+    <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
     <param from="$(var config)" />
     <remap from="pose_wc" to="/initialpose" />
-  </composable_node> -->
+  </composable_node>
 </node_container>
 
 <group if="$(var gui)">
   <node pkg="rviz2" exec="rviz2" name="rviz2" 
       args="-d $(find-pkg-share rmcl_examples)/rviz/rmcl_micp.rviz">
     <param name="use_sim_time" value="true" />
-    <param name="rviz_mesh_tools_plugins.Map3D" value="$(find-pkg-share rmcl_examples)/maps/$(var map).dae" />
+    <param name="rviz_mesh_tools_plugins.Map3D" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
   </node>
 </group>
 

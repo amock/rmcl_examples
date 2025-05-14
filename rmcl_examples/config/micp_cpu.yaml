@@ -32,14 +32,14 @@ rmcl_xtion_conversion:
     width:
       skip_begin: 0 # skip elements from begin  
       skip_end:   0 # skip elements from end
-      increment:  1 # increment to skip data. Simple filter to reduce scan density
+      increment:  4 # increment to skip data. Simple filter to reduce scan density
     height:
       skip_begin: 0 # cutting height from begin
-      skip_end:   0 # cutting height from end
-      increment:  1 # increment to skip data. Simple filter to reduce scan density 
+      skip_end:   100 # cutting height from end
+      increment:  2 # increment to skip data. Simple filter to reduce scan density 
     model:
       range_min: 0.3
-      range_max: 50.0
+      range_max: 20.0
 
 # Parameters for the MICP-L node
 micp_localization:
@@ -73,17 +73,16 @@ micp_localization:
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
-      velodyne:
-        model_source: topic
-        data_source: topic
-        topic:
-          name: /rmcl_pc_conversion/rmcl_scan
-          type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
-        correspondences:
-          backend: embree
-          type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
-          adaptive_max_dist_min: 0.15
-          max_dist: 2.0
+      # velodyne:
+      #   data_source: topic
+      #   model_type: o1dn
+      #   topic_name: /rmcl_inputs/velodyne
+      #   correspondences:
+      #     backend: embree
+      #     type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
+      #     adaptive_max_dist_min: 0.15
+      #     max_dist: 2.0
+      #     visualize: true
       # sick_tim:
       #   data_source: topic
       #   topic_name: /rmcl_scan_conversion/rmcl_scan
@@ -94,16 +93,16 @@ micp_localization:
       #     adaptive_max_dist_min: 0.15
       #     max_dist: 2.0
       #     visualize: true
-      # velodyne2:
-      #   data_source: topic
-      #   topic:
-      #     name: /rmcl_pc_conversion/rmcl_scan
-      #     type: rmcl_msgs/msg/O1DnStamped
-      #   correspondences:
-      #     backend: embree
-      #     type: CP
-      #     adaptive_max_dist_min: 0.1
-      #     max_dist: 1.0
+      asus_xtion:
+        data_source: topic
+        model_type: o1dn # TODO: test pinhole
+        topic_name: /rmcl_inputs/asus_xtion
+        correspondences:
+          backend: embree
+          type: RC
+          adaptive_max_dist_min: 0.1
+          max_dist: 1.0
+          visualize: True
       # wheels:
       #   data_source: parameters
       #   model_type: ondn

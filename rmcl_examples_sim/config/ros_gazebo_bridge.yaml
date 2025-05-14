@@ -15,13 +15,13 @@
   gz_type_name: "ignition.msgs.IMU"
   direction: GZ_TO_ROS
 
-- ros_topic_name: "/scan"
+- ros_topic_name: "/lidar2d/scan"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_topic_name: "/model/robot/scan"
   gz_type_name: "ignition.msgs.LaserScan"
   direction: GZ_TO_ROS
 
-- ros_topic_name: "/velodyne/points"
+- ros_topic_name: "/lidar3d/points"
   ros_type_name: "sensor_msgs/msg/PointCloud2"
   gz_topic_name: "/model/robot/cloud/points"
   gz_type_name: "ignition.msgs.PointCloudPacked"
