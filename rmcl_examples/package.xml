@@ -12,8 +12,8 @@
     
     <buildtool_depend>ament_cmake</buildtool_depend>
     
-    <exec_depend version_gte="2.1.0">rmcl_ros</exec_depend>
-    <exec_depend version_gte="2.0.0">rmcl_msgs</exec_depend>
+    <exec_depend version_gte="2.2.0">rmcl_ros</exec_depend>
+    <exec_depend version_gte="2.1.0">rmcl_msgs</exec_depend>
 
     <test_depend>ament_lint_auto</test_depend>
     <test_depend>ament_lint_common</test_depend>
