@@ -135,5 +135,5 @@ ros2 launch rmcl_examples_micpl rmcl_micpl_wheels.launch map:=tray
 Things you can play around with:
 - Provide new pose guesses using the `2D Pose Estimate` or `Mesh Pose Estimate` tool from the tools panel on top.
 The correspondences are visualized as marker gray-ish hair.
-- Teleop the robot
+- Teleop the robot (eg, with [`teleop_twist_keyboard`](https://index.ros.org/r/teleop_twist_keyboard/), or [`rqt_robot_steering`](https://github.com/ros-visualization/rqt_robot_steering)).
 

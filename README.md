@@ -65,3 +65,9 @@ Let the sensor data flow more efficiently to MICP-L.
 #### 5. [Sensor Combinations](/rmcl_examples_micpl_combinations/)
 
 Combine several sensors and use all at once.
+
+#### 6. [GPU Acceleration](/rmcl_examples_micpl_gpu/)
+
+Accelerate the registration process using hardware-accelerated ray tracing.
+
+#### 7. [Parameters](/rmcl_examples_micpl_parameters)
