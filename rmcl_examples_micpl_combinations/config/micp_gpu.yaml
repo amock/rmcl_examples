@@ -6,7 +6,7 @@ rmcl_pc_conversion:
       range_min: 0.3
       range_max: 50.0
 
-micp_localization:
+rmcl_micpl:
   ros__parameters:
 
     # required

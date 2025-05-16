@@ -25,7 +25,7 @@
     <remap from="input" to="/rgbd_camera/points"/>
     <remap from="output" to="/rmcl_inputs/asus_xtion"/>
   </composable_node>
-  <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="micp_localization">
+  <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="rmcl_micpl">
     <param name="use_sim_time" value="true" />
     <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
     <param from="$(var config)" />

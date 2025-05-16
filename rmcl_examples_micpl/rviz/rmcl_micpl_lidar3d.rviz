@@ -249,7 +249,7 @@ Visualization Manager:
             Filter size: 10
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /micp_localization/sensors/lidar3d/correspondences
+            Value: /rmcl_micpl/sensors/lidar3d/correspondences
           Value: true
       Enabled: true
       Name: LiDAR3D
@@ -313,7 +313,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9903980493545532
+      Pitch: 0.9853980541229248
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
       Yaw: 4.720460891723633

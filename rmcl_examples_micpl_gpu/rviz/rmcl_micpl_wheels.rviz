@@ -221,7 +221,7 @@ Visualization Manager:
             Filter size: 10
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /micp_localization/sensors/wheels/correspondences
+            Value: /rmcl_micpl/sensors/wheels/correspondences
           Value: true
       Enabled: true
       Name: Wheels

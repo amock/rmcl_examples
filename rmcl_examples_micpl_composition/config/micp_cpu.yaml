@@ -42,7 +42,7 @@ rmcl_xtion_conversion:
       range_max: 50.0
 
 # Parameters for the MICP-L node
-micp_localization:
+rmcl_micpl:
   ros__parameters:
     use_sim_time: True
 

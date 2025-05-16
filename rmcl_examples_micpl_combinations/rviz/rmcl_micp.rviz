@@ -207,7 +207,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /micp_localization/sensors/velodyne/correspondences
+        Value: /rmcl_micpl/sensors/velodyne/correspondences
       Value: true
   Enabled: true
   Global Options:
