@@ -7,14 +7,14 @@
 
   <node pkg="rmcl_ros" exec="conv_pc2_to_o1dn_node" name="rmcl_lidar3d_conversion" output="screen">
     <param name="use_sim_time" value="true" />
-    <param from="$(find-pkg-share rmcl_examples_micpl)/config/rmcl_micpl_lidar3d.yaml" />
-    <remap from="cloud" to="/lidar3d/points"/>
-    <remap from="rmcl_scan" to="/rmcl_inputs/lidar3d"/>
+    <param from="$(var config)" />
+    <remap from="input" to="/lidar3d/points"/>
+    <remap from="output" to="/rmcl_inputs/lidar3d"/>
   </node>
 
   <node pkg="rmcl_ros" exec="micp_localization_node" name="micp_localization" output="screen">
     <param name="use_sim_time" value="true" />
-    <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/rmcl_micpl_lidar3d.yaml" />
+    <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
     <param from="$(var config)" />
   </node>
 
@@ -23,6 +23,8 @@
     <param from="$(var config)" />
     <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
     <remap from="scan" to="/rmcl_inputs/lidar3d"/>
+    <remap from="outlier_map" to="~/outlier_map" />
+    <remap from="outlier_scan" to="~/outlier_scan" />
   </node>
 
   <group if="$(var gui)">

@@ -8,7 +8,7 @@ rmcl_lidar3d_conversion:
     width:
       skip_begin: 0 # skip elements from begin  
       skip_end:   0 # skip elements from end
-      increment:  8 # increment to skip data. Simple filter to reduce scan density
+      increment:  2 # increment to skip data. Simple filter to reduce scan density
     height:
       skip_begin: 0 # cutting height from begin
       skip_end:   0 # cutting height from end
@@ -22,15 +22,16 @@ micp_localization:
   ros__parameters:
     use_sim_time: True
 
-    # required
+    # required frames
     base_frame: base_footprint
     map_frame: map
     odom_frame: odom
 
     # maximum number of correction steps per second
     # lower this to decrease the correction speed but save energy 
-    correction_rate_max: 10.0
-    optimization_iterations: 5
+    disable_correction: False
+    correction_rate_max: 50.0
+    optimization_iterations: 8
     tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
     tf_rate: 100.0
     broadcast_tf: True
@@ -40,23 +41,22 @@ micp_localization:
     # adjust max distance dependent of the state of localization
     adaptive_max_dist: True # enable adaptive max dist
 
-    # DEBUGGING
-    visualize_correspondences: True # TODO: readd this
-    disable_correction: False
-
     # initial pose changes
     initial_pose_offset: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
-      velodyne:
-        model_source: topic
+      lidar3d:
         data_source: topic
-        topic:
-          name: /rmcl_inputs/lidar3d
-          type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
+        model_type: o1dn
+        topic_name: /rmcl_inputs/lidar3d
         correspondences:
           backend: embree
-          type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
-          adaptive_max_dist_min: 0.15
+          type: RC
+          adaptive_max_dist_min: 0.05
           max_dist: 2.0
+          visualize: True
+
+rmcl_map_segmentation:
+  ros__parameters:
+    use_sim_time: True
