@@ -120,13 +120,13 @@ As mentioned for the 2D LiDAR, we can also use the wheels to correct the robots 
 To demonstrate this, in the first terminal, start the simulation without any sensor enabled:
 
 ```console
-ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=False lidar2d:=False rgbd_camera:=False map:=tray
+ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=False lidar2d:=False rgbd_camera:=False map:=sphere
 ```
 
 In a second terminal, start the following launch file
 
 ```console
-ros2 launch rmcl_examples_micpl rmcl_micpl_wheels.launch map:=tray
+ros2 launch rmcl_examples_micpl rmcl_micpl_wheels.launch map:=sphere
 ```
 
 ![RMCL MICP-L Wheels](.media/rmcl_examples_micpl_wheels.png)
