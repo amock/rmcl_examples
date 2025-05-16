@@ -7,8 +7,8 @@
 
   <node pkg="rmcl_ros" exec="conv_pcl2_to_o1dn_node" name="rmcl_pcl_conversion" output="screen">
     <param from="$(var config)" />
-    <remap from="cloud" to="/velodyne/points"/>
-    <remap from="rmcl_scan" to="~/rmcl_scan"/>
+    <remap from="input" to="/velodyne/points"/>
+    <remap from="output" to="~/rmcl_scan"/>
   </node>
 
   <node pkg="rmcl_ros" exec="o1dn_map_segmentation_embree_node" name="rmcl_map_segmentation" output="screen">

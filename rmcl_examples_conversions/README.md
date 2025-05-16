@@ -41,7 +41,25 @@ Here it helps to activate the `debug_cloud` parameter to see if the conversion w
 
 ### PC2 to O1Dn
 
+
+
 **Note**: This node omits the information about the actual scanning pattern.
+
+Run the simulation. Make sure the 3D LiDAR is enabled:
+
+```console
+ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=True map:=tray
+```
+
+The run the conversion node
+
+```console
+ros2 launch rmcl_examples_conversions pc2_to_o1dn.launch
+```
+
+![PC2toO1Dn](.media/pc2_to_o1dn_both.png)
+
+You will see points flickering since the RMCL point cloud overlays the original point cloud. With `rqt_reconfigure` you can now start the change the filter settings.
 
 ### PC2 to Scan
 
@@ -49,10 +67,23 @@ When the scanning pattern can be described using a spherical model, this node ha
 
 The input point cloud is then used to determine which pixels have valid range measurements. Pixels without corresponding points are marked as `Inf`, or a value that is out of the valid range.
 
+
+
+**Note**: Gazebo has a certain rendering technique for LiDARs which is known to be not very accurate. Therefore the scan tends to be "edgy" sometimes. See this [issue](https://github.com/gazebosim/gz-sim/issues/2743).
+
 ### Scan to Scan
 
 This node converts a `sensor_msgs/LaserScan` message into a `rmcl_msgs/ScanStamped`. Since `sensor_msgs/LaserScan` fully describes the sensor's measurement process, no additional parameters are required for the conversion.
 However, optional parameters are available to pre-filter the data, for example, to reduce the density of the scan by making it more sparse.
 
+```console
+ros2 launch rmcl_examples_sim start_robot_launch.py lidar2d:=True map:=tray
+```
+
+```console
+ros2 launch rmcl_examples_conversions scan_to_scan.launch 
+```
+
+![ScanToScan](.media/scan_to_scan.png)
 
 

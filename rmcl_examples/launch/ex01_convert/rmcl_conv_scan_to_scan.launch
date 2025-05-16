@@ -6,8 +6,8 @@
 
   <node pkg="rmcl_ros" exec="conv_scan_to_scan_node" name="rmcl_conversion" output="screen">
     <param from="$(var config)" />
-    <remap from="scan" to="/scan"/>
-    <remap from="rmcl_scan" to="~/rmcl_scan"/>
+    <remap from="input" to="/scan"/>
+    <remap from="output" to="~/rmcl_scan"/>
   </node>
 
   <group if="$(var gui)">

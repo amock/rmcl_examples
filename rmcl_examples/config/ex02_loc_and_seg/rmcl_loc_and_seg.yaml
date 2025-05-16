@@ -46,7 +46,7 @@ micp_localization:
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
       velodyne:
-        topic: rmcl_pcl_conversion/rmcl_scan
+        topic: rmcl_pc_conversion/rmcl_scan
         topic_type: rmcl_msgs/msg/O1DnStamped
         type: o1dn
         micp:

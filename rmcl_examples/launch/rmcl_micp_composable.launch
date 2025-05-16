@@ -10,20 +10,20 @@
   <composable_node pkg="rmcl_ros" plugin="rmcl::Pc2ToO1DnNode" name="rmcl_velo_conversion">
     <param name="use_sim_time" value="true" />
     <param from="$(var config)" />
-    <remap from="cloud" to="/velodyne/points"/>
-    <remap from="rmcl_scan" to="/rmcl_inputs/velodyne"/>
+    <remap from="input" to="/velodyne/points"/>
+    <remap from="output" to="/rmcl_inputs/velodyne"/>
   </composable_node>
   <composable_node pkg="rmcl_ros" plugin="rmcl::ScanToScanNode" name="rmcl_sick_conversion">
     <param name="use_sim_time" value="true" />
     <param from="$(var config)" />
-    <remap from="scan" to="/scan"/>
-    <remap from="rmcl_scan" to="/rmcl_inputs/sick_tim"/>
+    <remap from="input" to="/scan"/>
+    <remap from="output" to="/rmcl_inputs/sick_tim"/>
   </composable_node>
   <composable_node pkg="rmcl_ros" plugin="rmcl::Pc2ToO1DnNode" name="rmcl_xtion_conversion">
     <param name="use_sim_time" value="true" />
     <param from="$(var config)" />
-    <remap from="cloud" to="/rgbd_camera/points"/>
-    <remap from="rmcl_scan" to="/rmcl_inputs/asus_xtion"/>
+    <remap from="input" to="/rgbd_camera/points"/>
+    <remap from="output" to="/rmcl_inputs/asus_xtion"/>
   </composable_node>
   <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="micp_localization">
     <param name="use_sim_time" value="true" />
