@@ -1,6 +1,6 @@
 # rmcl_examples
 
-Examples to test the [rmcl](https://github.com/uos/rmcl) ROS package.
+Examples to test and demonstrate the functionalities [rmcl](https://github.com/uos/rmcl) ROS package.
 
 ## Simulation
 
@@ -26,7 +26,7 @@ The [`rmcl_examples_maps`](/rmcl_examples_maps/) contains mesh maps each of whic
 ros2 launch rmcl_examples_maps show_map.launch map:=tray
 ```
 
-Those maps can are used throughout the examples as reference map for [RMCL](https://github.com/uos/rmcl) to localize a robot. See [`rmcl_examples_maps`](/rmcl_examples_maps/) for further detailes.
+Those maps can are used throughout the examples as reference map for [RMCL](https://github.com/uos/rmcl) to localize a robot. See [`rmcl_examples_maps`](/rmcl_examples_maps/) for further details.
 
 ## MICP-L - Quickstart
 
@@ -41,7 +41,7 @@ ros2 launch rmcl_examples rmcl_micp.launch map:=tray gui:=True
 The argument `gui:=True` courses a preconfigured RViz windows to open.
 After that you can set a pose in RViz via `2D Pose Estimate` and see the robot localizing itself given the range measurements of the Velodyne LiDAR. Alternatively, you can use the `Mesh Pose Guess` tool of [`mesh_tools`](https://github.com/naturerobots/mesh_tools) to provide a pose guess on the mesh.
 
-![MICP](.resources/vid/rmcl_micp_1280.gif)
+![MICP](.media/rmcl_micp_1280.gif)
 
 
 ### MICP-L - Examples
@@ -71,3 +71,5 @@ Combine several sensors and use all at once.
 Accelerate the registration process using hardware-accelerated ray tracing.
 
 #### 7. [Parameters](/rmcl_examples_micpl_parameters)
+
+Tune the parameters of MICP-L for your needs.
