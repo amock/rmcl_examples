@@ -1,9 +1,7 @@
 # RMCL Conversions
 
 
-So, well-known message types such as `sensor_msgs/PointCloud2` or `sensor_msgs/LaserScan` has to be converted to one of those RMCL messages first, before starting the RMCL nodes.
-
-Reason ...
+So, well-known message types such as `sensor_msgs/PointCloud2` or `sensor_msgs/LaserScan` has to be converted to one of RMCL's messages first, before starting the RMCL nodes.
 
 ## RMCL Messages
 
@@ -31,6 +29,30 @@ However, when no surface is detected, one usually either omits the point entirel
 One might assume this is unimportant, as after all the point is invalid. But this assumption overlooks a key fact: when a LiDAR beam doesn't hit anything, it is actually reporting that a large volume of space is unoccupied. In this case, the LiDAR effectively measures the entire possible range as free space.
 
 To preserve this valuable information, we provide message types that retain such properties. Once the data is converted into `rmcl_msgs`, we can be confident that no critical information about the scanning process is lost.
-It is now the responsibility of robotics engineers to ensure their sensor data is correctly transformed into the appropriate `rmcl_msgs`. For most commonly used message formats, we provide conversion nodes to assist with this task, which are described in the following subsections.
+It is now the responsibility of robotics engineers to ensure their sensor data is correctly transformed into the appropriate `rmcl_msgs`. 
+
+
+## Shipped Conversion Nodes
+
+For most commonly used message formats, we provide conversion nodes to assist with this task, which are described in the following subsections.
+
+All nodes can be configured at runtime using `rqt_reconfigure`.
+Here it helps to activate the `debug_cloud` parameter to see if the conversion went as expected.
+
+### PC2 to O1Dn
+
+**Note**: This node omits the information about the actual scanning pattern.
+
+### PC2 to Scan
+
+When the scanning pattern can be described using a spherical model, this node handles the conversion for you. The scanner model is defined via ROS parameters, creating a virtual pixel matrix in spherical coordinates.
+
+The input point cloud is then used to determine which pixels have valid range measurements. Pixels without corresponding points are marked as `Inf`, or a value that is out of the valid range.
+
+### Scan to Scan
+
+This node converts a `sensor_msgs/LaserScan` message into a `rmcl_msgs/ScanStamped`. Since `sensor_msgs/LaserScan` fully describes the sensor's measurement process, no additional parameters are required for the conversion.
+However, optional parameters are available to pre-filter the data, for example, to reduce the density of the scan by making it more sparse.
+
 
 
