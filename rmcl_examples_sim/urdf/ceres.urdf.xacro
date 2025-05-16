@@ -226,7 +226,7 @@
       <sensor name="lidar2d" type="gpu_lidar">
         <pose relative_to="lidar2d">0 0 0 0 0 0</pose>
         <topic>/model/robot/scan</topic>
-        <update_rate>10</update_rate>
+        <update_rate>20</update_rate>
         <ray>
           <scan>
             <horizontal>
@@ -297,7 +297,7 @@
           </image>
           <clip>
             <near>0.1</near>
-            <far>100</far>
+            <far>20</far>
           </clip>
         </camera>
         <always_on>1</always_on>

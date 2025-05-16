@@ -42,7 +42,7 @@ micp_localization:
 
     # DEBUGGING
     visualize_correspondences: True # TODO: readd this
-    disable_correction: False
+    disable_correction: True
 
     # initial pose changes
     initial_pose_offset: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
@@ -56,6 +56,6 @@ micp_localization:
         correspondences:
           backend: embree
           type: RC
-          adaptive_max_dist_min: 0.5
+          adaptive_max_dist_min: 0.1
           max_dist: 2.0
           visualize: True
