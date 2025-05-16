@@ -5,7 +5,7 @@ project(rmcl_examples_sim VERSION 2.1.0)
 find_package(ament_cmake REQUIRED)
 
 # Install Directories
-install(DIRECTORY config models urdf worlds launch
+install(DIRECTORY config models urdf worlds launch rviz
     DESTINATION share/${PROJECT_NAME}
 )
 

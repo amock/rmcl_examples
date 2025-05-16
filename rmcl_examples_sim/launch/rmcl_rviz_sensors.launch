@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+<node pkg="rviz2" exec="rviz2" name="rviz2" 
+    args="-d $(find-pkg-share rmcl_examples_sim)/rviz/rmcl_rviz_sensors.rviz">
+    <param name="use_sim_time" value="true" />
+</node>
+
+</launch>
