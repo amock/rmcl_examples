@@ -18,7 +18,7 @@ rmcl_lidar3d_conversion:
       range_max: 50.0
 
 # Parameters for the MICP-L node
-micp_localization:
+rmcl_micpl:
   ros__parameters:
     use_sim_time: True
 
@@ -53,6 +53,7 @@ micp_localization:
         correspondences:
           backend: embree
           type: RC
+          metric: P2L
           adaptive_max_dist_min: 0.05
           max_dist: 2.0
           visualize: True
@@ -60,3 +61,6 @@ micp_localization:
 rmcl_map_segmentation:
   ros__parameters:
     use_sim_time: True
+    map_frame: map
+    min_dist_outlier_scan: 0.15
+    min_dist_outlier_map: 0.15

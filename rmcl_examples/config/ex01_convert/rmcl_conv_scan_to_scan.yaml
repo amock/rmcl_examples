@@ -1,6 +1,0 @@
-rmcl_conversion:
-  ros__parameters:
-    use_sim_time: True
-    skip_begin: 0
-    skip_end: 0
-    increment: 1

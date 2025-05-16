@@ -11,7 +11,7 @@
     <remap from="output" to="/rmcl_inputs/lidar2d"/>
 </node>
 
-<node pkg="rmcl_ros" exec="micp_localization_node" name="micp_localization" output="screen">
+<node pkg="rmcl_ros" exec="micp_localization_node" name="rmcl_micpl" output="screen">
   <param name="use_sim_time" value="true" />
   <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
   <param from="$(find-pkg-share rmcl_examples_micpl)/config/rmcl_micpl_lidar2d.yaml" />

@@ -56,6 +56,7 @@ micp_localization:
         correspondences:
           backend: embree
           type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
+          metric: P2L
           adaptive_max_dist_min: 0.5
           max_dist: 2.0
           visualize: true

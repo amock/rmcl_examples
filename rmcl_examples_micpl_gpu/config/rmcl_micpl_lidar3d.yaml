@@ -19,7 +19,7 @@ rmcl_lidar3d_conversion:
       increment:  1 # increment to skip data. Simple filter to reduce scan density 
 
 # Parameters for the MICP-L node
-micp_localization:
+rmcl_micpl:
   ros__parameters:
     use_sim_time: True
 
@@ -54,6 +54,7 @@ micp_localization:
         correspondences:
           backend: optix
           type: RC
+          metric: P2L
           adaptive_max_dist_min: 0.5
           max_dist: 2.0
           visualize: True
