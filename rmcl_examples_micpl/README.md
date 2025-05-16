@@ -17,7 +17,7 @@ First, we want to see how each sensor data looks like. So we enable every sensor
 ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=True lidar2d:=True rgbd_camera:=True map:=avz
 ```
 
-![RMCL sim all sensors](.media/rmcl_examples_sim_allsensors_avz.png)
+![RMCL sim all sensors](/rmcl_examples_sim/.media/gazebo_allsensors_avz.png)
 
 In the opened window of Gazebo, you see a simple differential drive robot that represents a virtual clone of a [Ceres](https://github.com/uos/ceres_robot) robot (Volksbot platform). The robot is spawned in the AVZ world. This world also exists in reality, its an office floor located in Osnabrück, Germany. In addition you see three sensors (Rayman-like) attached to the robot, colored in red, blue, and green.
 
@@ -26,7 +26,7 @@ With RViz you can visualize the sensor data of all three sensors:
 ros2 launch rmcl_examples_micpl rmcl_rviz_sensors.launch
 ```
 
-![RViz all sensors](.media/rmcl_examples_rviz_allsensors_avz.png)
+![RViz all sensors](/rmcl_examples_sim/.media/rviz_allsensors_avz.png)
 
 The sensors `lidar3d`, `lidar2d`, and `rgbd_camera` and the corresponding sensor data is colored in red, blue, and green, respectively. 
 
