@@ -1,0 +1,55 @@
+# Parameters for the MICP-L node
+micp_localization:
+  ros__parameters:
+    use_sim_time: True
+
+    # required frames
+    base_frame: base_footprint
+    odom_frame: odom
+    map_frame: map
+
+    # maximum number of correction steps per second
+    # lower this to decrease the correction speed but save energy 
+    disable_correction: False
+    correction_rate_max: 1.0
+    optimization_iterations: 1
+    tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
+    tf_rate: 50.0
+    broadcast_tf: True
+    publish_pose: True
+    pose_noise: 0.01 # minimum noise of pose. can be set from sensor noise
+
+    # adjust max distance dependent of the state of localization
+    adaptive_max_dist: True # enable adaptive max dist
+
+    # initial pose changes
+    initial_pose_offset: [0.0, 0.0, 0.2, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
+
+    # describe your sensor setup here
+    sensors: # list of range sensors - at least one is required
+      wheels:
+        data_source: parameters
+        model_type: ondn
+        model:
+          width: 4
+          height: 1
+          range_min: 0.0
+          range_max: 10.0
+          #           X     Y      Z
+          origs: [  0.15,  0.18,  0.4, # front left
+                    0.15, -0.18,  0.4, # front right
+                   -0.15,  0.18,  0.4, # rear left
+                   -0.15, -0.18,  0.4] # rear right
+          dirs:  [  0.0,  0.0,  -1.0,
+                    0.0,  0.0,  -1.0, # all point down
+                    0.0,  0.0,  -1.0,
+                    0.0,  0.0,  -1.0]
+        data:
+          frame: base_footprint
+          ranges: [0.4, 0.4, 0.4, 0.4]
+        correspondences:
+          backend: embree
+          type: RC
+          adaptive_max_dist_min: 0.5
+          max_dist: 2.0
+          visualize: True
