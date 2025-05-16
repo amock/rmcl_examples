@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="map" default="tray" description="map name. Choose between 'cube', 'cylinder', 'floor', 'sphere', 'tray', 'trays', 'avz'" />
-  <arg name="config" default="$(find-pkg-share rmcl_examples)/config/ex02_loc_and_seg/rmcl_loc_and_seg.yaml" description="path to config file. You can find examples at rmcl_examples/config" />
-  <arg name="gui" default="false" description="start preconfigured rviz. you can also use the 'rviz.launch' instead." />
+  <arg name="map" default="tray" description="Map name. Choose between 'cube', 'cylinder', 'floor', 'sphere', 'tray', 'trays', 'avz'" />
+  <arg name="config" default="$(find-pkg-share rmcl_examples_micpl_segmentation)/config/segment_lidar3d.yaml" description="Path to config file. You can find examples at rmcl_examples/config" />
+  <arg name="gui" default="true" description="Start a preconfigured RViz window." />
 
   <node pkg="rmcl_ros" exec="conv_pc2_to_o1dn_node" name="rmcl_lidar3d_conversion" output="screen">
     <param name="use_sim_time" value="true" />
@@ -14,22 +14,22 @@
 
   <node pkg="rmcl_ros" exec="micp_localization_node" name="micp_localization" output="screen">
     <param name="use_sim_time" value="true" />
-    <param name="map_file" value="$(find-pkg-share rmcl_examples_micpl)/config/rmcl_micpl_lidar3d.yaml" />
+    <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/rmcl_micpl_lidar3d.yaml" />
     <param from="$(var config)" />
   </node>
 
   <!-- Enable this -->
-  <!-- <node pkg="rmcl_ros" exec="o1dn_map_segmentation_embree_node" name="rmcl_map_segmentation" output="screen">
+  <node pkg="rmcl_ros" exec="o1dn_map_segmentation_embree_node" name="rmcl_map_segmentation" output="screen">
     <param from="$(var config)" />
-    <param name="map_file" value="$(find-pkg-share rmcl_examples)/maps/$(var map).dae" />
-    <remap from="scan" to="rmcl_pcl_conversion/rmcl_scan"/>
-  </node> -->
+    <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
+    <remap from="scan" to="/rmcl_inputs/lidar3d"/>
+  </node>
 
   <group if="$(var gui)">
     <node pkg="rviz2" exec="rviz2" name="rviz2" 
-        args="-d $(find-pkg-share rmcl_examples)/rviz/ex02_loc_and_seg.rviz">
+        args="-d $(find-pkg-share rmcl_examples_micpl_segmentation)/rviz/segment_lidar3d.rviz">
         <param name="use_sim_time" value="true" />
-        <param name="rviz_mesh_tools_plugins.Map3D" value="$(find-pkg-share rmcl_examples)/maps/$(var map).dae" />
+        <param name="rviz_mesh_tools_plugins.Map3D" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
     </node>
   </group>
 
