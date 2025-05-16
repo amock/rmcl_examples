@@ -36,7 +36,7 @@ The sensors `lidar3d`, `lidar2d`, and `rgbd_camera` and the corresponding sensor
 | `lidar2d`     | Green | 1 scan layer (vertical). 270 points per scan. 270° horizontal field of view. 15 Hz. | Sick Tim |
 | `rgbd_camera` | Blue  | A depth camera which has 320x240 pixels (width x height). Pinhole sensor model. 30 Hz. | Asus Xtion |
 
-For more info about the simulation we refer to the simulation package, [rmcl_examples_sim](/rmcl_examples_sim/).
+For more info about the simulation we refer to the simulation package, [`rmcl_examples_sim`](/rmcl_examples_sim/).
 
 ## MICP-L
 
@@ -44,50 +44,93 @@ Now we want to localize the robot continuously relative to a map using the MICP-
 
 ### 3D LiDAR
 
-Start the simulation with only the LiDAR enabled:
+In the first terminal, start the simulation with only the LiDAR enabled:
 
 ```console
 ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=True lidar2d:=False rgbd_camera:=False map:=avz
 ```
 
-Start MICP-L via
+In a second terminal, start MICP-L via
 
 ```console
-ros2 launch rmcl_examples_micpl rmcl_micpl_lidar3d.launch map:=avz gui:=True
+ros2 launch rmcl_examples_micpl rmcl_micpl_lidar3d.launch map:=avz
 ```
 
 an RViz window opens
 
 ![MICP-L LiDAR3D](.media/rmcl_examples_micpl_lidar3d.png)
 
-Now you can provide new pose guesses using the `2D Pose Estimate` or `Mesh Pose Estimate` tool from the tools panel on top.
-The correspondences are visualized as marker gray-ish hair.
+
+Things you can play around with:
+- Provide new pose guesses using the `2D Pose Estimate` or `Mesh Pose Estimate` tool from the tools panel on top.
+The correspondences are visualized as marker gray-ish hair. You will see that, even though the initial guess about the robots position is chosen badly, it will quickly converge to the actual position of the robot inside of the map.
+- MICP-L uses a filtered version of the 3D LiDAR (`LiDAR3D/PreProcessed`). Visualize the original point cloud by enabling `LiDAR3D/Data`.
+- Teleop the robot (eg, with [`teleop_twist_keyboard`](https://index.ros.org/r/teleop_twist_keyboard/), or [`rqt_robot_steering`](https://github.com/ros-visualization/rqt_robot_steering)).
+
 
 ### Depth Camera
 
-Start the simulated robot and enable only the RGB-D camera.
+In the first terminal, start the simulated robot and enable only the RGB-D camera.
 
 ```console
 ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=False lidar2d:=False rgbd_camera:=True map:=tray
 ```
 
-Start the following launch file
+In a second terminal, Start the following launch file
 
 ```console
-ros2 launch rmcl_examples_micpl rmcl_micpl_depth.launch gui:=True
+ros2 launch rmcl_examples_micpl rmcl_micpl_depth.launch map:=tray
 ```
 
 ![RMCL MICP-L RGB-D](.media/rmcl_examples_micpl_depth.png)
 
-
+- Provide new pose guesses using the `2D Pose Estimate` or `Mesh Pose Estimate` tool from the tools panel on top.
+The correspondences are visualized as marker gray-ish hair. You will see that, even though the initial guess about the robots position is chosen badly, it will quickly converge to the actual position of the robot inside of the map.
 - MICP-L uses a filtered version of the RGB-D camera (`RGB-D Camera/PreProcessed`). Visualize the original point cloud by enabling `RGB-D Camera/Data`.
-- Teleop the robot
+- Teleop the robot (eg, with [`teleop_twist_keyboard`](https://index.ros.org/r/teleop_twist_keyboard/), or [`rqt_robot_steering`](https://github.com/ros-visualization/rqt_robot_steering)).
 
 
 ### 2D LiDAR
 
+In the first terminal, start the simulated robot and enable only the 2D LiDAR.
+
+```console
+ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=False lidar2d:=True rgbd_camera:=False map:=cube
+```
+
+In the second terminal, start the following launch file
+
+```console
+ros2 launch rmcl_examples_micpl rmcl_micpl_lidar2d.launch map:=cube
+```
+
+![RMCL MICP-L LiDAR2D](.media/rmcl_examples_micpl_lidar2d.png)
+
+Things you can play around with:
+- Provide new pose guesses using the `2D Pose Estimate` or `Mesh Pose Estimate` tool from the tools panel on top.
+The correspondences are visualized as marker gray-ish hair. You will see that, even though the initial guess about the robots position is chosen badly, it will quickly converge to the actual position of the robot inside of the map.
+- MICP-L uses a filtered version of the RGB-D camera (`RGB-D Camera/PreProcessed`). Visualize the original point cloud by enabling `RGB-D Camera/Data`.
+- Teleop the robot
+
+You will probably notice the robot hovering over the ground. This is simply because only given the information of a 2D LiDAR, all locations inside the cube along the up-axis are equally valid. In later examples we will show how to combine the information of the robot cannot fly and the wheels are always attached to the ground to make it possible to use 2D sensors to successfully localize in a 3D map. --> [`rmcl_examples_micpl_combinations`](/rmcl_examples_micpl_combinations/).
 
 ### Wheels
+
+As mentioned for the 2D LiDAR, we can also use the wheels to correct the robots location.
+
+To demonstrate this, in the first terminal, start the simulation without any sensor enabled:
+
+```console
+ros2 launch rmcl_examples_sim start_robot_launch.py lidar3d:=False lidar2d:=False rgbd_camera:=False map:=tray
+```
+
+In a second terminal, start the following launch file
+
+```console
+ros2 launch rmcl_examples_micpl rmcl_micpl_wheels.launch map:=tray
+```
+
+
 
 
 ## Worlds

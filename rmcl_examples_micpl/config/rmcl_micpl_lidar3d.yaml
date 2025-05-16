@@ -5,6 +5,10 @@ rmcl_lidar3d_conversion:
   ros__parameters:
     use_sim_time: True
     debug_cloud: True
+    model:
+      range_min: 0.3
+      range_max: 80.0
+    # filter / pre-processing:
     width:
       skip_begin: 0 # skip elements from begin  
       skip_end:   0 # skip elements from end
@@ -13,22 +17,20 @@ rmcl_lidar3d_conversion:
       skip_begin: 0 # cutting height from begin
       skip_end:   0 # cutting height from end
       increment:  1 # increment to skip data. Simple filter to reduce scan density 
-    model:
-      range_min: 0.3
-      range_max: 80.0
 
 # Parameters for the MICP-L node
 micp_localization:
   ros__parameters:
     use_sim_time: True
 
-    # required
+    # required frames
     base_frame: base_footprint
     map_frame: map
     odom_frame: odom
 
     # maximum number of correction steps per second
     # lower this to decrease the correction speed but save energy 
+    disable_correction: False
     correction_rate_max: 20.0
     optimization_iterations: 5
     tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
@@ -40,10 +42,6 @@ micp_localization:
     # adjust max distance dependent of the state of localization
     adaptive_max_dist: True # enable adaptive max dist
 
-    # DEBUGGING
-    visualize_correspondences: True # TODO: readd this
-    disable_correction: False
-
     # initial pose changes
     initial_pose_offset: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
 
@@ -51,7 +49,7 @@ micp_localization:
     sensors: # list of range sensors - at least one is required
       lidar3d:
         data_source: topic
-        model_type: o1dn # TODO: test pinhole
+        model_type: o1dn
         topic_name: /rmcl_inputs/lidar3d
         correspondences:
           backend: embree
