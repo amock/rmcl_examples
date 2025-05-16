@@ -5,10 +5,7 @@ So, well-known message types such as `sensor_msgs/PointCloud2` or `sensor_msgs/L
 
 Reason ...
 
-
-
 ## RMCL Messages
-
 
 The localization approaches in RMCL seek to support four main messages that include sensor model and data: 
 
