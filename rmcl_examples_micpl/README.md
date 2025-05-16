@@ -116,8 +116,7 @@ You will probably notice the robot hovering over the ground. This is simply beca
 
 ### Wheels
 
-As mentioned for the 2D LiDAR, we can also use the wheels to correct the robots location.
-
+As mentioned for the 2D LiDAR, we can also use the wheels to correct the robots location. This is done by placing a "virtual" sensor in the center of a wheel that always points down and measures the same distance; the radius of a wheel. 
 To demonstrate this, in the first terminal, start the simulation without any sensor enabled:
 
 ```console
@@ -130,7 +129,11 @@ In a second terminal, start the following launch file
 ros2 launch rmcl_examples_micpl rmcl_micpl_wheels.launch map:=tray
 ```
 
+![RMCL MICP-L Wheels](.media/rmcl_examples_micpl_wheels.png)
 
 
+Things you can play around with:
+- Provide new pose guesses using the `2D Pose Estimate` or `Mesh Pose Estimate` tool from the tools panel on top.
+The correspondences are visualized as marker gray-ish hair.
+- Teleop the robot
 
-## Worlds

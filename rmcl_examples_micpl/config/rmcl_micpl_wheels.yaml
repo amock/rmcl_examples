@@ -11,7 +11,7 @@ micp_localization:
     # maximum number of correction steps per second
     # lower this to decrease the correction speed but save energy 
     disable_correction: False
-    correction_rate_max: 1.0
+    correction_rate_max: 20.0
     optimization_iterations: 1
     tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
     tf_rate: 50.0
@@ -36,17 +36,17 @@ micp_localization:
           range_min: 0.0
           range_max: 10.0
           #           X     Y      Z
-          origs: [  0.15,  0.18,  0.4, # front left
-                    0.15, -0.18,  0.4, # front right
-                   -0.15,  0.18,  0.4, # rear left
-                   -0.15, -0.18,  0.4] # rear right
+          origs: [  0.15,  0.18,  0.2, # front left
+                    0.15, -0.18,  0.2, # front right
+                   -0.15,  0.18,  0.2, # rear left
+                   -0.15, -0.18,  0.2] # rear right
           dirs:  [  0.0,  0.0,  -1.0,
                     0.0,  0.0,  -1.0, # all point down
                     0.0,  0.0,  -1.0,
                     0.0,  0.0,  -1.0]
         data:
           frame: base_footprint
-          ranges: [0.4, 0.4, 0.4, 0.4]
+          ranges: [0.2, 0.2, 0.2, 0.2]
         correspondences:
           backend: embree
           type: RC
