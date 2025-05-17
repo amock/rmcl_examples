@@ -1,6 +1,6 @@
 # rmcl_examples
 
-Examples to test and demonstrate the functionalities [rmcl](https://github.com/uos/rmcl) ROS package.
+Examples to test and demonstrate the functionalities of the [rmcl](https://github.com/uos/rmcl) ROS package.
 
 ## Simulation
 
