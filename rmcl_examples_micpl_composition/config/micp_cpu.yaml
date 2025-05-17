@@ -1,0 +1,131 @@
+# Parameters for point cloud conversion node
+# it converts a sensor_msgs/PointCloud2 to a rmcl_msgs/O1DnStamped
+# simple fitering can be achieved by skipping rows or cols
+rmcl_velo_conversion:
+  ros__parameters:
+    use_sim_time: True
+    debug_cloud: True
+    width:
+      skip_begin: 0 # skip elements from begin  
+      skip_end:   0 # skip elements from end
+      increment:  8 # increment to skip data. Simple filter to reduce scan density
+    height:
+      skip_begin: 0 # cutting height from begin
+      skip_end:   0 # cutting height from end
+      increment:  1 # increment to skip data. Simple filter to reduce scan density 
+    model:
+      range_min: 0.3
+      range_max: 50.0
+
+rmcl_sick_conversion:
+  ros__parameters:
+    use_sim_time: True
+    debug_cloud: True
+    skip_begin: 0 # skip elements from begin  
+    skip_end:   0 # skip elements from end
+    increment:  1 # increment to skip data. Simple filter to reduce scan density
+
+rmcl_xtion_conversion:
+  ros__parameters:
+    use_sim_time: True
+    debug_cloud: True
+    width:
+      skip_begin: 0 # skip elements from begin  
+      skip_end:   0 # skip elements from end
+      increment:  1 # increment to skip data. Simple filter to reduce scan density
+    height:
+      skip_begin: 0 # cutting height from begin
+      skip_end:   0 # cutting height from end
+      increment:  1 # increment to skip data. Simple filter to reduce scan density 
+    model:
+      range_min: 0.3
+      range_max: 50.0
+
+# Parameters for the MICP-L node
+rmcl_micpl:
+  ros__parameters:
+    use_sim_time: True
+
+    # required
+    base_frame: base_footprint
+    map_frame: map
+    odom_frame: odom
+
+    # maximum number of correction steps per second
+    # lower this to decrease the correction speed but save energy 
+    correction_rate_max: 10.0
+    optimization_iterations: 5
+    tf_time_source: 1 # 0: measurement_latest, 1: correction_latest
+    tf_rate: 100.0
+    broadcast_tf: True
+    publish_pose: True
+    pose_noise: 0.01 # minimum noise of pose. can be set from sensor noise
+
+    # adjust max distance dependent of the state of localization
+    adaptive_max_dist: True # enable adaptive max dist
+
+    # DEBUGGING
+    visualize_correspondences: True # TODO: readd this
+    disable_correction: False
+
+    # initial pose changes
+    initial_pose_offset: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
+
+    # describe your sensor setup here
+    sensors: # list of range sensors - at least one is required
+      velodyne:
+        model_source: topic
+        data_source: topic
+        topic:
+          name: /rmcl_pc_conversion/rmcl_scan
+          type: rmcl_msgs/msg/O1DnStamped # if possible use RMCL internal message types instead
+        correspondences:
+          backend: embree
+          type: RC # RC: ray casting (embree and optix), CP: closest point (embree obly)
+          adaptive_max_dist_min: 0.15
+          max_dist: 2.0
+      # sick_tim:
+      #   data_source: topic
+      #   topic_name: /rmcl_scan_conversion/rmcl_scan
+      #   model_type: spherical # spherical, pinhole, o1dn, ondn
+      #   correspondences:
+      #     backend: embree
+      #     type: RC
+      #     adaptive_max_dist_min: 0.15
+      #     max_dist: 2.0
+      #     visualize: true
+      # velodyne2:
+      #   data_source: topic
+      #   topic:
+      #     name: /rmcl_pc_conversion/rmcl_scan
+      #     type: rmcl_msgs/msg/O1DnStamped
+      #   correspondences:
+      #     backend: embree
+      #     type: CP
+      #     adaptive_max_dist_min: 0.1
+      #     max_dist: 1.0
+      # wheels:
+      #   data_source: parameters
+      #   model_type: ondn
+      #   model:
+      #     width: 4
+      #     height: 1
+      #     range_min: 0.0
+      #     range_max: 10.0
+      #     origs: [ 0.15,  0.18,  0.2, # front left 
+      #              0.15, -0.18,  0.2, # front right
+      #             -0.15,  0.18,  0.2, # rear left
+      #             -0.15, -0.18,  0.2] # rear right
+      #     dirs:  [ 0.0,  0.0, -1.0,
+      #              0.0,  0.0, -1.0,
+      #              0.0,  0.0, -1.0,
+      #              0.0,  0.0, -1.0]
+      #   data:
+      #     frame: base_footprint
+      #     ranges: [0.2, 0.2, 0.2, 0.2]
+      #   correspondences:
+      #     backend: embree
+      #     type: CP # RC: ray casting (embree and optix), CP: closest point (embree obly)
+      #     adaptive_max_dist_min: 2.0
+      #     max_dist: 2.0
+      #     visualize: true

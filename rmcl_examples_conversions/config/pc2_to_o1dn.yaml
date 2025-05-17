@@ -1,0 +1,19 @@
+# Parameters for point cloud conversion node
+# it converts a sensor_msgs/PointCloud2 to a rmcl_msgs/O1DnStamped
+# simple fitering can be achieved by skipping rows or cols
+rmcl_pc2_to_o1dn:
+  ros__parameters:
+    use_sim_time: True
+    debug_cloud: True
+    model:
+      range_min: 0.3
+      range_max: 80.0
+    # filter / pre-processing:
+    width:
+      skip_begin: 0 # skip elements from begin  
+      skip_end:   0 # skip elements from end
+      increment:  8 # increment to skip data. Simple filter to reduce scan density
+    height:
+      skip_begin: 0 # cutting height from begin
+      skip_end:   0 # cutting height from end
+      increment:  1 # increment to skip data. Simple filter to reduce scan density 

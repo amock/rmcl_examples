@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+<arg name="map" default="tray" description="Map name. Choose between 'cube', 'cylinder', 'corridor', 'sphere', 'tray', 'trays', 'avz'" />
+<arg name="gui" default="true" description="Start a preconfigured RViz window." />
+
+<node pkg="rmcl_ros" exec="micp_localization_node" name="rmcl_micpl" output="screen">
+  <param name="use_sim_time" value="true" />
+  <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
+  <param from="$(find-pkg-share rmcl_examples_micpl)/config/rmcl_micpl_wheels.yaml" />
+</node>
+
+<group if="$(var gui)">
+  <node pkg="rviz2" exec="rviz2" name="rviz2" 
+      args="-d $(find-pkg-share rmcl_examples_micpl)/rviz/rmcl_micpl_wheels.rviz">
+      <param name="use_sim_time" value="true" />
+      <param name="rviz_mesh_tools_plugins.Map3D" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
+  </node>
+</group>
+
+</launch>
