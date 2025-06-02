@@ -73,3 +73,11 @@ Accelerate the registration process using hardware-accelerated ray tracing.
 #### 7. [Parameters](/rmcl_examples_micpl_parameters)
 
 Tune the parameters of MICP-L for your needs.
+
+
+
+## Branch Compatibility
+
+|  RMCL Branch    |  Supported ROS 2 versions    |
+|:----|:----|
+|  main   |  humble, jazzy |
