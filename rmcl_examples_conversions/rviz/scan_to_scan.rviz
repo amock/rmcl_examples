@@ -158,9 +158,9 @@ Visualization Manager:
         Value: true
       Axis: Z
       Channel Name: intensity
-      Class: rviz_default_plugins/PointCloud
+      Class: rviz_default_plugins/PointCloud2
       Color: 255; 255; 255
-      Color Transformer: Intensity
+      Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
@@ -168,16 +168,15 @@ Visualization Manager:
       Max Intensity: 4096
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: PointCloud
+      Name: PointCloud2
       Position Transformer: XYZ
       Selectable: true
-      Size (Pixels): 5
+      Size (Pixels): 7
       Size (m): 0.009999999776482582
       Style: Points
       Topic:
         Depth: 5
         Durability Policy: Volatile
-        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /rmcl_scan_to_scan/debug_cloud
@@ -236,18 +235,18 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.8879852294921875
-        Y: 0.010211998596787453
-        Z: -2.650615692138672
+        X: 1.8544116020202637
+        Y: -0.019291603937745094
+        Z: -1.8819719552993774
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4553990662097931
+      Pitch: 0.7053989171981812
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.5503878593444824
+      Yaw: 1.545387864112854
     Saved: ~
 Window Geometry:
   Displays:
