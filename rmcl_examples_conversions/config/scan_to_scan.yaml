@@ -3,7 +3,6 @@
 # simple fitering can be achieved by skipping rows or cols
 rmcl_scan_to_scan:
   ros__parameters:
-    use_sim_time: True
     debug_cloud: True
     # filter / pre-processing:
     skip_begin: 0

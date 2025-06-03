@@ -18,7 +18,6 @@
     <param from="$(var config)" />
   </node>
 
-  <!-- Enable this -->
   <node pkg="rmcl_ros" exec="o1dn_map_segmentation_embree_node" name="rmcl_map_segmentation" output="screen">
     <param from="$(var config)" />
     <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />

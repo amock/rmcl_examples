@@ -1,9 +1,12 @@
+##############################
+# WARNING: DEPRECATED CONFIG #
+##############################
+
 # Parameters for point cloud conversion node
 # it converts a sensor_msgs/PointCloud2 to a rmcl_msgs/O1DnStamped
 # simple fitering can be achieved by skipping rows or cols
 rmcl_lidar3d_conversion:
   ros__parameters:
-    use_sim_time: True
     debug_cloud: True
     width:
       skip_begin: 0 # skip elements from begin  
@@ -20,8 +23,6 @@ rmcl_lidar3d_conversion:
 # Parameters for the MICP-L node
 rmcl_micpl:
   ros__parameters:
-    use_sim_time: True
-
     # required
     base_frame: base_footprint
     map_frame: map

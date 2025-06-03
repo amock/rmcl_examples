@@ -3,7 +3,6 @@
 # simple fitering can be achieved by skipping rows or cols
 rmcl_lidar3d_conversion:
   ros__parameters:
-    use_sim_time: True
     debug_cloud: True
     width:
       skip_begin: 0 # skip elements from begin  
@@ -20,8 +19,6 @@ rmcl_lidar3d_conversion:
 # Parameters for the MICP-L node
 rmcl_micpl:
   ros__parameters:
-    use_sim_time: True
-
     # required frames
     base_frame: base_footprint
     map_frame: map
@@ -41,8 +38,11 @@ rmcl_micpl:
     # adjust max distance dependent of the state of localization
     adaptive_max_dist: True # enable adaptive max dist
 
-    # initial pose changes
-    initial_pose_offset: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
+    # initial offset applied to every incoming pose guess
+    pose_guess_offset: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
+
+    # very first initial pose guess
+    initial_pose_guess: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # translation + euler angles (6) or translation + quaternion (7)
 
     # describe your sensor setup here
     sensors: # list of range sensors - at least one is required
@@ -60,7 +60,6 @@ rmcl_micpl:
 
 rmcl_map_segmentation:
   ros__parameters:
-    use_sim_time: True
     map_frame: map
     min_dist_outlier_scan: 0.15
     min_dist_outlier_map: 0.15

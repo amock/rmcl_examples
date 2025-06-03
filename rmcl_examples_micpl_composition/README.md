@@ -1,13 +1,5 @@
 # MICP-L Node Compositions
 
-> Under Construction
-
-The purpose of this package is to show different possibilities of integrating RMCL nodes in a launch file.
-
-This will include
-1. XML & Python launch file examples
-2. Normal vs Composable Nodes examples
-
-And descriptions when what is useful.
-
-
+This package extends the example of [`rmcl_examples_micpl_segmentation`](/rmcl_examples_micpl_segmentation/) by adding
+1. XML & Python launch files
+2. Launching Normal vs Composable Nodes

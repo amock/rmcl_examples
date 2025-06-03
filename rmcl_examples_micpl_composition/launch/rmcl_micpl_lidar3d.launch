@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+
+<arg name="map" default="tray" description="Map name. Choose between 'cube', 'cylinder', 'corridor', 'sphere', 'tray', 'trays', 'avz'" />
+<arg name="gui" default="true" description="Start preconfigured rviz. you can also use the 'rviz.launch' instead." />
+<arg name="use_sim_time" default="true" />
+
+<node_container pkg="rclcpp_components" exec="component_container_mt" name="rmcl" namespace="" output="screen">
+  <composable_node pkg="rmcl_ros" plugin="rmcl::Pc2ToO1DnNode" name="rmcl_lidar3d_conversion">
+    <param from="$(find-pkg-share rmcl_examples_micpl_segmentation)/config/segment_lidar3d.yaml" />
+    <remap from="input" to="/lidar3d/points"/>
+    <remap from="output" to="/rmcl_inputs/lidar3d"/>
+    <param name="use_sim_time" value="$(var use_sim_time)" />
+  </composable_node>
+  <composable_node pkg="rmcl_ros" plugin="rmcl::MICPLocalizationNode" name="rmcl_micpl">
+    <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
+    <param from="$(find-pkg-share rmcl_examples_micpl_segmentation)/config/segment_lidar3d.yaml" />
+    <param name="use_sim_time" value="$(var use_sim_time)" />
+  </composable_node>
+  <composable_node pkg="rmcl_ros" plugin="rmcl::O1DnMapSegmentationEmbreeNode" name="rmcl_map_segmentation">
+    <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
+    <param from="$(find-pkg-share rmcl_examples_micpl_segmentation)/config/segment_lidar3d.yaml" />
+    <remap from="scan" to="/rmcl_inputs/lidar3d"/>
+    <remap from="outlier_map" to="~/outlier_map" />
+    <remap from="outlier_scan" to="~/outlier_scan" />
+    <param name="use_sim_time" value="$(var use_sim_time)" />
+  </composable_node>
+</node_container>
+
+<group if="$(var gui)">
+  <node pkg="rviz2" exec="rviz2" name="rviz2" 
+      args="-d $(find-pkg-share rmcl_examples_micpl_segmentation)/rviz/segment_lidar3d.rviz">
+      <param name="use_sim_time" value="$(var use_sim_time)" />
+      <param name="rviz_mesh_tools_plugins.Map3D" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
+  </node>
+</group>
+
+</launch>

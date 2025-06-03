@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /Map3D1/Mesh1/Display Type1
+        - /RGB-D Camera1
       Splitter Ratio: 0.5
     Tree Height: 693
   - Class: rviz_common/Selection
@@ -214,8 +215,8 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz_default_plugins/PointCloud
-          Color: 0; 255; 0
+          Class: rviz_default_plugins/PointCloud2
+          Color: 25; 255; 0
           Color Transformer: FlatColor
           Decay Time: 0
           Enabled: true
@@ -233,7 +234,6 @@ Visualization Manager:
           Topic:
             Depth: 5
             Durability Policy: Volatile
-            Filter size: 10
             History Policy: Keep Last
             Reliability Policy: Reliable
             Value: /rmcl_depth_conversion/debug_cloud
@@ -315,10 +315,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.865398108959198
+      Pitch: 0.7003982663154602
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.5353975296020508
+      Yaw: 1.550397515296936
     Saved: ~
 Window Geometry:
   Displays:
