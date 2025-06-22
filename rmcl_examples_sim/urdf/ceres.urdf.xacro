@@ -237,7 +237,7 @@
             </horizontal>
             <vertical>
               <samples>1</samples>
-              <resolution>0.01</resolution>
+              <resolution>1</resolution>
               <min_angle>0</min_angle>
               <max_angle>0</max_angle>
             </vertical>
