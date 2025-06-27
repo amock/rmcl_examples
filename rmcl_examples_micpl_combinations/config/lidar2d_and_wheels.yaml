@@ -51,6 +51,7 @@ rmcl_micpl:
           adaptive_max_dist_min: 0.5
           max_dist: 2.0
           visualize: True
+        weight: 1.0 # this weight is multiplied times the number of measurements
       wheels:
         data_source: parameters
         model_type: ondn
@@ -78,3 +79,4 @@ rmcl_micpl:
           adaptive_max_dist_min: 0.5
           max_dist: 2.0
           visualize: True
+        weight: 100.0 # this weight is multiplied times the number of measurements

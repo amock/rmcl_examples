@@ -68,6 +68,7 @@ rmcl_micpl:
           adaptive_max_dist_min: 0.1
           max_dist: 2.0
           visualize: True
+        weight: 1.0
       lidar2d:
         data_source: topic
         model_type: spherical
@@ -79,3 +80,4 @@ rmcl_micpl:
           adaptive_max_dist_min: 0.5
           max_dist: 2.0
           visualize: True
+        weight: 1.0
