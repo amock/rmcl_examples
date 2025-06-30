@@ -4,16 +4,16 @@
 <arg name="map" default="tray" description="Map name. Choose between 'cube', 'cylinder', 'corridor', 'sphere', 'tray', 'trays', 'avz'" />
 <arg name="gui" default="true" description="Start a preconfigured rviz window." />
 
-<node pkg="rmcl_ros" exec="conv_pc2_to_o1dn_node" name="rmcl_lidar3d_conversion" output="screen">
+<node pkg="rmcl_ros" exec="conv_pc2_to_scan_node" name="rmcl_lidar3d_conversion" output="screen">
     <param name="use_sim_time" value="true" />
-    <param from="$(find-pkg-share rmcl_examples_micpl)/config/rmcl_micpl_lidar3d.yaml" />
+    <param from="$(find-pkg-share rmcl_examples_micpl_gpu)/config/rmcl_micpl_lidar3d_spherical.yaml" />
     <remap from="input" to="/lidar3d/points"/>
     <remap from="output" to="/rmcl_inputs/lidar3d"/>
 </node>
 
 <node pkg="rmcl_ros" exec="micp_localization_node" name="rmcl_micpl" output="screen">
   <param name="use_sim_time" value="true" />
-  <param name="map_file" value="$(find-pkg-share rmcl_examples_micpl)/config/rmcl_micpl_lidar3d.yaml" />
+  <param name="map_file" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
   <param from="$(find-pkg-share rmcl_examples_micpl_gpu)/config/rmcl_micpl_lidar3d_spherical.yaml" />
 </node>
 
