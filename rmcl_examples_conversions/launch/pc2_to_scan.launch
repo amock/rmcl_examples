@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+<arg name="gui" default="true" description="Start a preconfigured RViz window." />
+
+<node pkg="rmcl_ros" exec="conv_pc2_to_scan_node" name="rmcl_pc2_to_scan" output="screen">
+  <param name="use_sim_time" value="true" />
+  <param from="$(find-pkg-share rmcl_examples_conversions)/config/pc2_to_scan.yaml" />
+  <remap from="input" to="/lidar3d/points"/>
+  <remap from="output" to="~/rmcl_scan"/>
+</node>
+
+<group if="$(var gui)">
+  <node pkg="rviz2" exec="rviz2" name="rviz2" 
+      args="-d $(find-pkg-share rmcl_examples_conversions)/rviz/pc2_to_scan.rviz">
+      <param name="use_sim_time" value="true" />
+  </node>
+</group>
+
+</launch>

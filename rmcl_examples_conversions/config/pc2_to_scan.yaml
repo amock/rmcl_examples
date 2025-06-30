@@ -1,0 +1,19 @@
+# Parameters for point cloud conversion node
+# it converts a sensor_msgs/PointCloud2 to a rmcl_msgs/O1DnStamped
+# simple fitering can be achieved by skipping rows or cols
+rmcl_pc2_to_scan:
+  ros__parameters:
+    auto_detect_range: false
+    auto_detect_phi: false
+    auto_detect_theta: false
+    auto_detect_width_height: false
+    debug_cloud: true
+    model:
+      range_min: 0.5
+      range_max: 75.0
+      phi_min: -0.2617993877991494
+      phi_inc:  0.03490658503988659
+      phi_n: 16
+      theta_min: -3.14159011841
+      theta_inc: 0.01431249500496489 # 2 pi / 439 (not 440 otherwise we would get two points on origin)
+      theta_n: 440
