@@ -149,7 +149,7 @@ ros2 launch rmcl_examples_sim start_robot_launch.py
 and run the conversion and MICP-L nodes
 
 ```console
-ros2 launch rmcl_examples_micpl_gpu rmcl_micpl_lidar3d_spherical.launch
+ros2 launch rmcl_examples_micpl rmcl_micpl_lidar3d_spherical.launch
 ```
 
 The results look similar than for the 3D LiDAR example (using O1Dn model internally).
