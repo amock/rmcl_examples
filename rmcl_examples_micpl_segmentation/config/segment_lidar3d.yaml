@@ -54,8 +54,8 @@ rmcl_micpl:
           backend: embree
           type: RC
           metric: P2L
-          adaptive_max_dist_min: 0.05
-          max_dist: 2.0
+          adaptive_max_dist_min: 0.01
+          max_dist: 0.4
           visualize: True
 
 rmcl_map_segmentation:
