@@ -41,7 +41,7 @@ ros2 launch rmcl_examples rmcl_micpl.launch map:=tray gui:=True
 The argument `gui:=True` courses a preconfigured RViz windows to open.
 After that you can set a pose in RViz via `2D Pose Estimate` and see the robot localizing itself given the range measurements of the Velodyne LiDAR. Alternatively, you can use the `Mesh Pose Guess` tool of [`mesh_tools`](https://github.com/naturerobots/mesh_tools) to provide a pose guess on the mesh.
 
-![MICP](.media/rmcl_micp_1280.gif)
+![MICP](.media/rmcl_micpl.gif)
 
 ### MICP-L - Examples
 
@@ -92,7 +92,13 @@ and in second terminal RMCL
 ros2 launch rmcl_examples rmcl_rmcl.launch map:=avz
 ```
 
+![Teaser](.media/rmcl_rmcl.gif)
 
+To restart the global localization process, open a third terminal and enter:
+
+```bash
+ros2 service call /rmcl/global_localization std_srvs/srv/Empty {}
+```
 
 ## Branch Compatibility
 
