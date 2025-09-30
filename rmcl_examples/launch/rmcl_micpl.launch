@@ -2,8 +2,8 @@
 <launch>
 
 <arg name="map" default="tray" description="map name. Choose between 'cube', 'cylinder', 'corridor', 'sphere', 'tray', 'trays', 'avz'" />
-<arg name="config" default="$(find-pkg-share rmcl_examples)/config/micp_cpu.yaml" description="path to config file. You can find examples at rmcl_examples/config" />
-<arg name="gui" default="false" description="start preconfigured rviz. you can also use the 'rviz.launch' instead." />
+<arg name="config" default="$(find-pkg-share rmcl_examples)/config/micpl_cpu.yaml" description="path to config file. You can find examples at rmcl_examples/config" />
+<arg name="gui" default="true" description="start preconfigured rviz. you can also use the 'rviz.launch' instead." />
 
 <node pkg="rmcl_ros" exec="conv_pc2_to_o1dn_node" name="rmcl_velo_conversion" output="screen">
   <param name="use_sim_time" value="true" />
@@ -20,7 +20,7 @@
 
 <group if="$(var gui)">
   <node pkg="rviz2" exec="rviz2" name="rviz2" 
-      args="-d $(find-pkg-share rmcl_examples)/rviz/rmcl_micp.rviz">
+      args="-d $(find-pkg-share rmcl_examples)/rviz/rmcl_micpl.rviz">
       <param name="use_sim_time" value="true" />
       <param name="rviz_mesh_tools_plugins.Map3D" value="$(find-pkg-share rmcl_examples_maps)/maps/$(var map).dae" />
   </node>

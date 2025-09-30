@@ -10,7 +10,7 @@ In the [`rmcl_examples_sim`](/rmcl_examples_sim/) packages are placed several si
 
 The robot can be loaded into one simulation by calling
 
-```console
+```bash
 ros2 launch rmcl_examples_sim start_robot_launch.py map:=tray
 ```
 
@@ -22,7 +22,7 @@ The [`rmcl_examples_maps`](/rmcl_examples_maps/) contains mesh maps each of whic
 
 - [mesh_tools](https://github.com/naturerobots/mesh_tools)
 
-```console
+```bash
 ros2 launch rmcl_examples_maps show_map.launch map:=tray
 ```
 
@@ -32,8 +32,8 @@ Those maps can are used throughout the examples as reference map for [RMCL](http
 
 To start MICP-L (Mesh ICP Localization), run
 
-```console
-ros2 launch rmcl_examples rmcl_micp.launch map:=tray gui:=True
+```bash
+ros2 launch rmcl_examples rmcl_micpl.launch map:=tray gui:=True
 ```
 
 **Note**: the map has to match the environment that have been used with the simulation!
@@ -42,7 +42,6 @@ The argument `gui:=True` courses a preconfigured RViz windows to open.
 After that you can set a pose in RViz via `2D Pose Estimate` and see the robot localizing itself given the range measurements of the Velodyne LiDAR. Alternatively, you can use the `Mesh Pose Guess` tool of [`mesh_tools`](https://github.com/naturerobots/mesh_tools) to provide a pose guess on the mesh.
 
 ![MICP](.media/rmcl_micp_1280.gif)
-
 
 ### MICP-L - Examples
 
@@ -73,6 +72,25 @@ Accelerate the registration process using hardware-accelerated ray tracing.
 #### 7. [Parameters](/rmcl_examples_micpl_parameters)
 
 Tune the parameters of MICP-L for your needs.
+
+
+## RMCL- Quickstart
+
+> Note: RMCL is under development and heavy testing. 
+> Nevertheless we decided to pre-release the `v0` version in an unfinished state, because we think it can help other to see 
+> whats possible. Also we hope you can test this and perhaps help us in improving / finishing the last things.
+
+Close all open windows. Then start the simulation:
+
+```bash
+ros2 launch rmcl_examples_sim start_robot_launch.py map:=avz
+```
+
+and in second terminal RMCL
+
+```bash
+ros2 launch rmcl_examples rmcl_rmcl.launch map:=avz
+```
 
 
 
