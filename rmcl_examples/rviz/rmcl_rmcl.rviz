@@ -10,7 +10,7 @@ Panels:
         - /Map3D1/Mesh1/Geometry Topic1
         - /Map3D1/Mesh1/Display Type1
         - /Map3D1/Mesh1/Show Wireframe1
-        - /Particles1
+        - /RMCL1
       Splitter Ratio: 0.5
     Tree Height: 864
   - Class: rviz_common/Selection
@@ -191,8 +191,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 3.033137321472168
-        Min Value: -0.061289429664611816
+        Max Value: 3.0245158672332764
+        Min Value: -0.10058242082595825
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -222,40 +222,79 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: likelihood
-      Class: rviz_default_plugins/PointCloud
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
+    - Class: rviz_common/Group
+      Displays:
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: likelihood
+          Class: rviz_default_plugins/PointCloud
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 1.9696674346923828
+          Min Color: 0; 0; 0
+          Min Intensity: 1.0906753540039062
+          Name: Particles
+          Position Transformer: XYZ
+          Selectable: true
+          Size (Pixels): 1
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /rmcl/particles
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Axes Length: 1
+          Axes Radius: 0.10000000149011612
+          Class: rviz_default_plugins/PoseWithCovariance
+          Color: 255; 25; 0
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 1
+              Scale: 1
+              Value: true
+            Position:
+              Alpha: 0.30000001192092896
+              Color: 204; 51; 204
+              Scale: 1
+              Value: true
+            Value: true
+          Enabled: true
+          Head Length: 0.30000001192092896
+          Head Radius: 0.10000000149011612
+          Name: Pose
+          Shaft Length: 1
+          Shaft Radius: 0.05000000074505806
+          Shape: Arrow
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /rmcl/pose
+          Value: true
       Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 1.9864612817764282
-      Min Color: 0; 0; 0
-      Min Intensity: 1.5952852964401245
-      Name: Particles
-      Position Transformer: XYZ
-      Selectable: true
-      Size (Pixels): 1
-      Size (m): 0.009999999776482582
-      Style: Points
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /rmcl/particles
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
+      Name: RMCL
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -306,25 +345,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 28.39881134033203
+      Distance: 6.966693878173828
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.3510473966598511
-        Y: -2.5612986087799072
-        Z: 0.31064075231552124
+        X: 0.04991881549358368
+        Y: 0.15296131372451782
+        Z: 0.021513957530260086
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5347963571548462
+      Pitch: 1.544796347618103
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.1335666179656982
+      Yaw: 3.1203882694244385
     Saved: ~
 Window Geometry:
   Displays:
