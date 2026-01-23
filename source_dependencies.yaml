@@ -9,3 +9,12 @@ repositories:
     type: git
     url: https://github.com/uos/rmcl.git
     version: main
+  # viz:
+  lvr2:
+    type: git
+    url: https://github.com/uos/lvr2.git
+    version: main
+  mesh_tools:
+    type: git
+    url: https://github.com/uos/mesh_tools.git
+    version: main
