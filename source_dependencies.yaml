@@ -9,7 +9,7 @@ repositories:
     type: git
     url: https://github.com/uos/rmcl.git
     version: main
-  # viz:
+  # viz/exec dependencies:
   lvr2:
     type: git
     url: https://github.com/uos/lvr2.git
