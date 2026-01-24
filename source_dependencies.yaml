@@ -1,0 +1,20 @@
+# Every repository listed here will get cloned and built during CI runs.
+# Use this for repositories that cannot be installed via rosdep.
+repositories:
+  rmagine:
+    type: git
+    url: https://github.com/uos/rmagine.git
+    version: main
+  rmcl:
+    type: git
+    url: https://github.com/uos/rmcl.git
+    version: main
+  # viz/exec dependencies:
+  lvr2:
+    type: git
+    url: https://github.com/uos/lvr2.git
+    version: main
+  mesh_tools:
+    type: git
+    url: https://github.com/uos/mesh_tools.git
+    version: main

@@ -33,15 +33,36 @@ Those maps can are used throughout the examples as reference map for [RMCL](http
 To start MICP-L (Mesh ICP Localization), run
 
 ```bash
-ros2 launch rmcl_examples rmcl_micpl.launch map:=tray gui:=True
+ros2 launch rmcl_examples rmcl_micpl.launch map:=tray
 ```
 
 **Note**: the map has to match the environment that have been used with the simulation!
 
-The argument `gui:=True` courses a preconfigured RViz windows to open.
+A preconfigured RViz windows will be opened.
 After that you can set a pose in RViz via `2D Pose Estimate` and see the robot localizing itself given the range measurements of the Velodyne LiDAR. Alternatively, you can use the `Mesh Pose Guess` tool of [`mesh_tools`](https://github.com/naturerobots/mesh_tools) to provide a pose guess on the mesh.
 
 ![MICP](.media/rmcl_micpl.gif)
+
+
+### MICP-L - Quicktest Backends
+
+Dependend on which [rmagine backends](https://github.com/uos/rmagine) have been compiled, you might be able to use GPU acceleration out of the box. The default is rmagine with embree support:
+
+```bash
+ros2 launch rmcl_examples rmcl_micpl.launch map:=tray backend:=embree
+```
+
+If you compiled rmagine with OptiX support:
+
+```bash
+ros2 launch rmcl_examples rmcl_micpl.launch map:=tray backend:=optix
+```
+
+If you compiled rmagine with Vulkan and CUDA you can use the vulkan as accelerator
+
+```bash
+ros2 launch rmcl_examples rmcl_micpl.launch map:=tray backend:=vulkan
+```
 
 ### MICP-L - Examples
 
